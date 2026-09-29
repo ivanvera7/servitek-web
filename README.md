@@ -6,7 +6,7 @@
 
 **SERVITEK E.A.S.** — Electromecánica industrial y servicios eléctricos de alta exigencia en Paraguay.
 
-[![CI](https://github.com/ivan99vera1-wq/servitek-web/actions/workflows/ci.yml/badge.svg)](https://github.com/ivan99vera1-wq/servitek-web/actions/workflows/ci.yml)
+[![CI](https://github.com/ivanvera7/servitek-web/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanvera7/servitek-web/actions/workflows/ci.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
@@ -82,7 +82,7 @@ Requiere **Node.js 20 o superior**.
 ## Puesta en marcha
 
 ```bash
-git clone https://github.com/ivan99vera1-wq/servitek-web.git
+git clone https://github.com/ivanvera7/servitek-web.git
 cd servitek-web
 npm ci
 npm run dev
