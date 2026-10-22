@@ -4,67 +4,55 @@ import { Sector } from '@/types/sector';
 
 interface SectorCardProps {
   sector: Sector;
-  /** Posición en la lista. Alimenta la numeración 01, 02, 03... */
+  /** Posición en la lista: alimenta la numeración 01, 02, 03... */
   index?: number;
+  /** Versión corta, sin la lista de problemas (portada). */
+  compact?: boolean;
 }
 
-export function SectorCard({ sector, index = 0 }: SectorCardProps) {
+export function SectorCard({ sector, index = 0, compact = false }: SectorCardProps) {
   const number = String(index + 1).padStart(2, '0');
 
   return (
     <Link
       href={`/sectores/${sector.slug}`}
-      className="card-dark group relative flex h-full flex-col overflow-hidden p-6 sm:p-8"
+      className="panel panel-hover group flex h-full flex-col overflow-hidden p-7 sm:p-9"
     >
-      <span aria-hidden="true" className="index-watermark -top-4 right-1 text-[110px]">
+      <span
+        aria-hidden="true"
+        className="text-outline pointer-events-none absolute -right-2 -top-6 font-display text-[8rem] font-extrabold leading-none [font-stretch:125%]"
+      >
         {number}
       </span>
 
-      <div className="tech-frame" aria-hidden="true" />
+      <span className="number-index relative">SECTOR {number}</span>
 
-      {/* Cabecera */}
-      <div className="relative flex items-center gap-3">
-        <span className="index-number">{number}</span>
-        <span
+      <div className="relative mt-10 min-w-0 flex-1">
+        <h3 className="text-h3 font-semibold">{sector.shortTitle}</h3>
+        <p className="mt-4 leading-relaxed text-chrome-muted">{sector.description}</p>
+
+        {!compact && (
+          <div className="mt-8">
+            <p className="font-mono text-eyebrow uppercase text-chrome-muted">Problemas comunes</p>
+            <ul className="mt-4 space-y-3">
+              {sector.problems.map((problem) => (
+                <li key={problem} className="flex items-start gap-3 text-[0.9375rem] text-chrome-2">
+                  <span aria-hidden="true" className="mt-[0.7em] h-px w-4 shrink-0 bg-signal" />
+                  {problem}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <span className="relative mt-10 inline-flex items-center gap-2 border-t border-line pt-6 font-mono text-xs uppercase tracking-[0.14em] text-chrome-2 transition-colors duration-base group-hover:text-chrome">
+        {sector.cta}
+        <ArrowRight
+          className="h-4 w-4 transition-transform duration-base ease-out-expo group-hover:translate-x-1.5"
           aria-hidden="true"
-          className="h-px w-6 bg-accent/50 transition-[width] duration-base ease-out-expo group-hover:w-12"
         />
-        <span className="eyebrow text-white/55">SECTOR</span>
-      </div>
-
-      <div className="relative flex flex-1 flex-col">
-        <h3 className="mt-6 text-h3 text-white transition-colors duration-base group-hover:text-blue-text">
-          {sector.shortTitle}
-        </h3>
-        <p className="mt-3 leading-relaxed text-white/65">{sector.description}</p>
-
-        {/* Problemas comunes */}
-        <div className="mt-7 flex-1">
-          <h4 className="eyebrow text-white/55">PROBLEMAS COMUNES</h4>
-          <ul className="mt-4 space-y-2.5">
-            {sector.problems.slice(0, 3).map((problem) => (
-              <li key={problem} className="flex items-start gap-3 text-sm text-white/65">
-                <span
-                  aria-hidden="true"
-                  className="mt-[7px] h-px w-3 shrink-0 bg-accent/60 transition-[width] duration-base ease-out-expo group-hover:w-5"
-                />
-                {problem}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="relative mt-7 flex items-center justify-between border-t border-line pt-5">
-        <span className="inline-flex items-center text-sm font-medium text-white/75 transition-colors duration-base group-hover:text-blue-text">
-          {sector.cta}
-          <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-base ease-out-expo group-hover:translate-x-1.5" />
-        </span>
-        <span
-          aria-hidden="true"
-          className="h-1.5 w-1.5 rounded-full bg-accent opacity-0 transition-opacity duration-base group-hover:opacity-100"
-        />
-      </div>
+      </span>
     </Link>
   );
 }

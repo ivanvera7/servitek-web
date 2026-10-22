@@ -246,42 +246,63 @@ mano antes de subirlas**:
 | Fundador | WebP | 900 × 1200 (3:4) | < 150 kB |
 | Compartir en redes | JPEG | 1200 × 630 | < 150 kB |
 
-Las imágenes de servicios y proyectos que no son fotografías son marcadores
-generados: ilustraciones técnicas sobre fondo navy, pensadas para sustituirse
-por fotos reales de SERVITEK. Se usan como fondo de las tarjetas
-(`ServiceCard`, `ProjectCard` y las tarjetas de portada) y de la cabecera
-(`PageHero`) de cada ficha de detalle. Para reemplazar una, solo hace falta
-subir la foto real con el mismo nombre de archivo (o cambiar la ruta en
-`image` dentro de `services.ts` o `projects.ts`) — ningún componente
-necesita tocarse.
+Las imágenes de proyectos son marcadores generados (ilustraciones técnicas),
+pensados para sustituirse por fotos reales de SERVITEK: basta con subir la
+foto con el mismo nombre o cambiar `image` en `projects.ts`.
 
-Los sectores no llevan foto ni marcador de imagen: sus tarjetas y cabeceras
-van sin fondo propio, sobre el fondo ambiental del sitio (`Aurora`, ver
-`src/components/layout/Providers.tsx`). Así no suman peso de imagen y dejan
-ver el fondo, igual que el resto de las páginas internas.
+La fotografía de planta de la portada vive en `public/images/hero/` en dos
+tamaños (`planta-industrial.webp` y `-960.webp` para móvil).
 </details>
 
 ## Sistema de diseño
+
+"Cromo y corriente": sale del emblema de la marca, una S de metal pulido con
+la mitad superior roja, el trazo central cromado y la mitad inferior azul,
+sobre negro.
 
 Los colores viven **solo** en `tailwind.config.ts`. No se escribe ningún color
 a mano en los componentes.
 
 | Token | Uso |
 |---|---|
-| `navy`, `navy-deep`, `navy-dark`, `navy-light`, `navy-lighter` | Fondos |
-| `surface`, `surface-card`, `surface-muted` | Superficies y tarjetas |
-| `blue` | Marca. **Solo decorativo**: líneas, puntos, fondos translúcidos |
-| `blue-solid` / `blue-solid-hover` | Relleno de botón con texto blanco encima |
-| `blue-text` | Texto e iconos azules sobre fondo oscuro |
+| `ink`, `ink-2`, `ink-3`, `ink-4` | Fondo base, secciones alternas, tarjetas, campos |
+| `chrome`, `chrome-2`, `chrome-muted` | Texto principal, secundario y rótulos |
+| `chrome-dim` | Solo decorativo |
+| `signal` / `signal-text` | Rojo del emblema: filetes y puntos / texto |
+| `volt` / `volt-solid` / `volt-text` | Azul del emblema: halos / relleno / texto y enlaces |
 | `line`, `line-strong` | Bordes |
 | `danger`, `success`, `whatsapp` | Estados |
 
-**Reglas de contraste** (verificadas sobre los fondos reales del sitio):
+Tipografías (`next/font`, autoalojadas): **Archivo** con eje de anchura para
+titulares (expandida, como las letras del logotipo), **IBM Plex Sans** para el
+texto e **IBM Plex Mono** para rótulos técnicos.
 
-- `blue-solid` con texto blanco encima → **5,07:1**
-- `blue-text` sobre navy → **6,53:1**
-- El texto blanco **nunca baja del 55 %** de opacidad: por debajo no llega a 4,5:1
-- `blue` no vale para texto ni como relleno de botón (solo alcanza 4,15:1)
+Piezas reutilizables en `src/styles/globals.css`: `.btn-chrome` (botón
+principal de acero cepillado), `.btn-ghost`, `.panel` (tarjeta con canto
+biselado), `.eyebrow`, `.text-metal` (texto cromado), `.rule-tricolor`,
+`.conductor` (filete con un pulso de luz) y `.grid-lines`.
+
+Toda animación respeta `prefers-reduced-motion`. El fondo ambiental es CSS
+estático (dos halos y grano), sin WebGL.
+
+**Contraste** (verificado sobre `ink` y sobre las tarjetas `ink-3`): `chrome`
+16,7:1 · `chrome-2` 11,2:1 · `chrome-muted` 6,4:1 · `signal-text` 6,6:1 ·
+`volt-text` 8,3:1 · texto tinta sobre el botón cromado 16,7:1.
+
+### Logotipo e iconos
+
+Los SVG originales de la marca solo envuelven un PNG de ~1 MB. De ellos se
+generaron, recortados y comprimidos:
+
+| Archivo | Uso |
+|---|---|
+| `public/images/brand/servitek-logo.webp` | Logotipo horizontal (cabecera, pie). 54 kB |
+| `public/images/brand/servitek-logo.png` | Logotipo para el JSON-LD de Organization |
+| `public/images/brand/servitek-emblema.webp` | Emblema "S" (portada, cierres, cabeceras). 109 kB |
+| `favicon.ico`, `favicon-*.png`, `apple-touch-icon.png`, `icon-*.png` | Iconos de navegador y de app |
+| `og-image.jpg` | Vista previa al compartir el enlace (1200 × 630) |
+
+Ambos están pensados para fondo oscuro: el texto del logotipo es plateado.
 
 ## Variables de entorno
 
@@ -441,12 +462,12 @@ están en `.gitignore`.
 </details>
 
 <details>
-<summary><b>Por qué se distingue <code>blue</code> de <code>blue-solid</code> y <code>blue-text</code></b></summary>
+<summary><b>Por qué hay tres azules y dos rojos</b></summary>
 
-El azul de marca `#0878F9` no sirve para todo. Con texto blanco encima alcanza
-4,15:1, por debajo del mínimo AA de 4,5:1; y como texto sobre el fondo navy se
-queda en 4,48:1. Un solo token no puede cumplir en ambos papeles, así que hay
-tres: uno decorativo, uno más oscuro para rellenos y uno más claro para texto.
+Los colores del emblema (`volt` #2A6BFF, `signal` #E5202E) no llegan a 4,5:1
+como texto sobre el fondo negro. Por eso cada uno tiene una variante clara
+para texto (`volt-text`, `signal-text`) y el azul, otra más oscura para
+rellenos con texto blanco (`volt-solid`, 5,8:1).
 </details>
 
 ## Limitaciones conocidas

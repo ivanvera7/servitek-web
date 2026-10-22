@@ -1,88 +1,71 @@
 import Image from 'next/image';
-import { Quote, UserRound } from 'lucide-react';
 import { founder } from '@/data/company-content';
+import { Emblem } from '@/components/ui/Brand';
 
 /**
  * Ficha del fundador.
  *
- * Para poner la fotografía real basta con:
- *   1. Guardar la imagen en  public/images/equipo/walter-vera.webp
- *      (recomendado: recorte vertical 3:4, mínimo 800×1067 px, < 150 KB)
- *   2. Poner esa ruta en `founder.photo` dentro de src/data/company-content.ts
+ * Para poner la fotografía real basta con guardarla en
+ * public/images/equipo/walter-vera.webp (3:4, mínimo 800×1067 px, < 150 KB)
+ * y poner esa ruta en `founder.photo` (src/data/company-content.ts).
  *
- * Mientras `founder.photo` esté vacío se muestra un marcador con la
- * proporción final ya reservada, así el diseño no se mueve al sustituirlo.
+ * Mientras no haya foto se muestra el emblema en un marco con la proporción
+ * final ya reservada: el diseño no se mueve al sustituirlo.
  */
 export function FounderCard() {
   return (
-    <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,320px)_1fr] md:gap-14">
-      {/* Fotografía */}
-      <div className="group relative mx-auto w-full max-w-[320px]">
-        {/* Escuadras técnicas encuadrando el retrato */}
+    <div className="grid items-center gap-12 md:grid-cols-[minmax(0,22rem)_1fr] md:gap-16">
+      <div className="relative mx-auto w-full max-w-[22rem]">
         <span
           aria-hidden="true"
-          className="absolute -left-4 -top-4 h-10 w-10 border-l border-t border-accent/45"
+          className="absolute -left-3 -top-3 h-10 w-10 border-l border-t border-signal"
         />
         <span
           aria-hidden="true"
-          className="absolute -bottom-4 -right-4 h-10 w-10 border-b border-r border-blue/45"
+          className="absolute -bottom-3 -right-3 h-10 w-10 border-b border-r border-volt"
         />
-        <div className="relative aspect-[3/4] overflow-hidden rounded-[14px] border border-line bg-surface-card">
+        <div className="panel relative aspect-[3/4] overflow-hidden">
           {founder.photo ? (
             <Image
               src={founder.photo}
               alt={founder.photoAlt}
               fill
-              sizes="(max-width: 768px) 80vw, 320px"
-              className="object-cover transition-transform duration-slow ease-out-expo group-hover:scale-[1.04]"
+              sizes="(max-width: 768px) 80vw, 352px"
+              className="object-cover"
             />
           ) : (
-            <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
-              <UserRound className="h-14 w-14 text-blue-text/70" aria-hidden="true" />
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/55">
+            <div className="flex h-full flex-col items-center justify-center gap-6 p-10">
+              <div className="grid-lines" aria-hidden="true" />
+              <Emblem sizes="12rem" className="relative w-2/5 opacity-80" />
+              <span className="relative font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-chrome-muted">
                 Fotografía pendiente
               </span>
             </div>
           )}
         </div>
-        {/* Filete de acento bajo el retrato */}
-        <div
-          aria-hidden="true"
-          className="absolute -bottom-3 left-6 right-6 h-[2px] bg-gradient-to-r from-accent-deep via-blue/50 to-transparent"
-        />
       </div>
 
-      {/* Biografía */}
       <div>
-        <span className="inline-flex items-center gap-3">
-          <span className="status-dot" aria-hidden="true" />
-          <span className="eyebrow">FUNDADOR</span>
-          <span
-            aria-hidden="true"
-            className="h-px w-12 bg-gradient-to-r from-blue/60 to-transparent"
-          />
-        </span>
-
-        <h3 className="mt-6 text-h2 text-white">{founder.name}</h3>
-        <p className="mt-1 font-mono text-sm uppercase tracking-wide text-white/65">
+        <span className="eyebrow">Fundador</span>
+        <h3 className="mt-6 text-h2 font-semibold">{founder.name}</h3>
+        <p className="mt-2 font-mono text-sm uppercase tracking-[0.14em] text-chrome-muted">
           {founder.role}
         </p>
 
-        <div className="mt-6 space-y-4">
+        <div className="mt-8 space-y-5">
           {founder.bio.map((paragraph) => (
-            <p key={paragraph.slice(0, 40)} className="leading-relaxed text-white/70">
+            <p key={paragraph.slice(0, 40)} className="leading-relaxed text-chrome-2">
               {paragraph}
             </p>
           ))}
         </div>
 
         {founder.quote && (
-          <figure className="mt-10 border-l-2 border-accent pl-6">
-            <Quote className="mb-3 h-5 w-5 text-accent" aria-hidden="true" />
-            <blockquote className="text-lg italic leading-relaxed text-white/80">
-              {founder.quote}
+          <figure className="mt-12 border-l border-signal pl-7">
+            <blockquote className="font-display text-xl font-medium leading-snug text-chrome [font-stretch:105%] md:text-2xl">
+              «{founder.quote}»
             </blockquote>
-            <figcaption className="mt-3 font-mono text-xs uppercase tracking-wide text-white/60">
+            <figcaption className="mt-4 font-mono text-xs uppercase tracking-[0.14em] text-chrome-muted">
               {founder.name}
             </figcaption>
           </figure>

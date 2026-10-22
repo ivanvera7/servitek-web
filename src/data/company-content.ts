@@ -44,7 +44,6 @@ export const aboutContent = {
    */
   stats: [
     { value: "5", label: "Unidades de negocio" },
-    { value: "24/7", label: "Guardia de emergencias" },
     { value: "Paraguay", label: "Cobertura nacional" }
   ],
 
@@ -136,9 +135,8 @@ export const workProcess = [
 /**
  * Horario de atención. Un único origen para la web y para el JSON-LD:
  * antes vivía escrito a mano en ContactInfo y en lib/schema.ts, y ambos
- * se contradecían con el "24/7" de la portada.
+ * se contradecían.
  */
 export const businessHours = {
-  weekdays: { label: "Lunes a viernes", value: "08:00 - 17:00", opens: "08:00", closes: "17:00" },
-  emergency: { label: "Guardia de emergencias", value: "24/7" }
+  weekdays: { label: "Lunes a viernes", value: "08:00 - 17:00", opens: "08:00", closes: "17:00" }
 };

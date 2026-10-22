@@ -245,7 +245,7 @@ export const projects = [
 ### Proyectos demo (placeholders)
 
 Los proyectos actuales son DEMO. Cada uno ya tiene una imagen de portada
-generada (ilustración técnica sobre fondo navy) en `/public/images/projects/`,
+generada (ilustración técnica sobre fondo oscuro) en `/public/images/projects/`,
 referenciada desde el campo `image` de cada proyecto — se usa como fondo en
 la tarjeta de proyecto y en la cabecera de su página de detalle. Cuando tengas
 proyectos reales:
@@ -293,142 +293,58 @@ export const whatsappMessageTemplate = (data: FormData) => {
 
 ```
 /public/images/
-├── logo/          # logo-principal.webp (logo horizontal)
-├── hero/          # Imágenes del hero principal
-├── services/      # Imágenes por servicio
-├── projects/      # Imágenes por proyecto
-└── company/       # Imágenes institucionales
+├── brand/       # Logotipo y emblema de SERVITEK
+├── hero/        # Fotografía de planta de la portada (2 tamaños)
+├── services/    # Imágenes por servicio (referenciadas en services.ts)
+├── projects/    # Marcadores de proyecto (sustituir por fotos reales)
+├── brands/      # Logotipos de fabricantes representados
+└── equipo/      # Foto del fundador (ver LEEME.txt)
 ```
 
-Los sectores no tienen carpeta de imágenes: no usan fotografía
-(ver sección 4).
+### Cambiar la fotografía de la portada
 
-### Cambiar imagen del hero
-
-1. Colocar imagen en `/public/images/hero/`
-2. Actualizar referencia en `src/app/page.tsx` o en el componente Hero
-
-### Cambiar imagen de un servicio
-
-1. Colocar imagen en `/public/images/services/`
-2. Actualizar el campo `image` en `src/data/services.ts`
-
-### Fondo de un sector
-
-Los sectores no usan fotografía ni fondo propio (ver sección 4): se ven
-sobre el fondo ambiental del sitio, igual que el resto de las páginas.
+Sustituir `public/images/hero/planta-industrial.webp` (1600–1800 px de ancho,
+< 200 kB) y su versión móvil `planta-industrial-960.webp` (960 px) por otras
+con el mismo nombre. Se usa en `src/components/sections/ValueProposition.tsx`.
 
 ### Formatos recomendados
 
-- WebP preferido
-- JPG para fotos
-- PNG para logos con transparencia
-- Tamaño recomendado: 1200x800px (hero), 800x600px (cards)
+- WebP para fotografías
+- PNG solo para logos con transparencia
 
 ---
 
 ## 8. Logos
 
-### Ubicación
+Los archivos de origen de la marca son dos SVG (`serviteek_eas_premium.svg`,
+logotipo horizontal, y `serviteek_emblema_s_premium.svg`, emblema "S"). Cada
+uno solo envuelve un PNG de ~1 MB, así que el sitio no los usa directamente:
+de ellos se generaron versiones recortadas y comprimidas.
 
-```
-/public/images/logo/
-├── logo-principal.webp    # Logo horizontal (usado en Navbar, Hero, Footer)
-└── logo2.png              # Variante cuadrada sobre fondo blanco (no usada en el sitio)
+| Archivo | Uso |
+|---------|-----|
+| `images/brand/servitek-logo.webp` | Cabecera y pie (componente `Logo`) |
+| `images/brand/servitek-logo.png` | Logo del JSON-LD de Organization |
+| `images/brand/servitek-emblema.webp` | Emblema "S" (componente `Emblem`): portada, cierres, cabeceras, carga |
+| `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png` | Pestaña del navegador |
+| `apple-touch-icon.png`, `icon-192x192.png`, `icon-512x512.png` | iOS y manifest |
+| `og-image.jpg` | Vista previa al compartir en WhatsApp, LinkedIn, etc. |
 
-/public/
-└── logo-s.png            # Símbolo "S" (fuente original, disponible para regenerar íconos)
-```
+Los dos componentes viven en `src/components/ui/Brand.tsx`. Ambas piezas
+están diseñadas para fondo oscuro: el texto del logotipo es plateado.
 
-`logo-principal.webp` se recortó para quitar el eslogan anterior
-("PROVISIÓN DE MATERIALES Y SERVICIOS") que venía incluido como texto dentro
-de la propia imagen — el eslogan actual (`company.slogan`) ahora se escribe
-siempre como texto real en cada página, nunca dentro del archivo del logo.
-`logo2.png` conserva el eslogan anterior porque no se usa en ningún
-componente; si se retoma, aplicarle el mismo recorte.
-
-### Favicon e íconos (generados desde logo-s.png)
-
-```
-/public/
-├── favicon.png              # 48x48px — ícono de pestaña del navegador
-├── apple-touch-icon.png     # 180x180px — ícono para iOS
-├── icon-192x192.png         # 192x192px — manifest PWA
-└── icon-512x512.png         # 512x512px — manifest PWA
-```
-
-Estos archivos se generan a partir de `logo-s.png` con `sharp-cli`. Para regenerarlos, ejecutar:
-
-```bash
-cd public
-npx sharp-cli -i logo-s.png -o favicon.png resize 48 48 --fit cover --position centre
-npx sharp-cli -i logo-s.png -o apple-touch-icon.png resize 180 180 --fit cover --position centre
-npx sharp-cli -i logo-s.png -o icon-192x192.png resize 192 192 --fit cover --position centre
-npx sharp-cli -i logo-s.png -o icon-512x512.png resize 512 512 --fit cover --position centre
-```
-
-### Uso actual
-
-| Ubicación | Archivo |
-|-----------|---------|
-| Navbar (desktop) | `logo-principal.webp` |
-| Navbar (móvil) | `logo-principal.webp` |
-| Hero | `logo-principal.webp` |
-| Footer | `logo-principal.webp` |
-| Favicon | `favicon.png` |
-| Manifest | `icon-192x192.png`, `icon-512x512.png` |
+Si llega una versión vectorial real del logo, basta con sustituir estos
+archivos manteniendo los nombres (y las proporciones de ancho/alto que
+declara `Brand.tsx`).
 
 ---
 
-## 9. Colores
+## 9. Colores y tipografía
 
-### Paleta actual (rediseño visual navy/azul corporativo)
-
-**Archivo:** `tailwind.config.ts`
-
-```typescript
-colors: {
-  navy: {
-    DEFAULT: '#061321',    // Fondo principal
-    light: '#0A1F35',      // Fondo alternativo
-    lighter: '#0B2A47',    // Gradientes
-    dark: '#030B14',       // Footer
-  },
-  blue: {
-    DEFAULT: '#0878F9',    // Accent principal, CTAs, hover
-    bright: '#1683FF',     // Hover states
-  },
-}
-```
-
-**Archivo:** `src/styles/globals.css`
-
-```css
-:root {
-  --navy: 6 19 33;          /* #061321 */
-  --navy-light: 10 31 53;   /* #0A1F35 */
-  --blue: 8 120 249;        /* #0878F9 */
-  --blue-bright: 22 131 255;/* #1683FF */
-}
-```
-
-### Nota sobre la paleta anterior
-
-La paleta anterior (primary: `#0B2342`, accent/rojo: `#E30613`) fue reemplazada en el commit de rediseño visual. Los colores actuales son navy y azul eléctrico.
-
-### Cambiar fuentes
-
-**Archivo:** `tailwind.config.ts`
-
-```typescript
-fontFamily: {
-  sans: ['Inter', 'system-ui', 'sans-serif'],
-}
-```
-
-**Archivo:** `src/app/layout.tsx`
-
-Cambiar la importación de Google Fonts.
+La paleta, la tipografía y las piezas reutilizables están documentadas en el
+README, sección "Sistema de diseño". Los colores viven solo en
+`tailwind.config.ts`; las fuentes se cargan en `src/app/layout.tsx` con
+`next/font` (Archivo, IBM Plex Sans, IBM Plex Mono).
 
 ---
 

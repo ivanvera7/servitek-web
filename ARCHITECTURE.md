@@ -110,29 +110,12 @@ servitek-web/
 
 ## Sistema de Diseño (Design Tokens)
 
-### Colores
+### Colores y tipografía
 
-| Token | Valor | Uso |
-|-------|-------|-----|
-| `primary` | `#0B2342` | Azul corporativo oscuro (fondos, textos principales) |
-| `primary-light` | `#123A68` | Azul secundario |
-| `accent` | `#E30613` | Rojo corporativo (CTAs, acentos) |
-| `background` | `#FFFFFF` | Fondo principal |
-| `surface` | `#F4F6F8` | Fondo de secciones alternas |
-| `text` | `#1B1F24` | Texto principal |
-| `text-muted` | `#6B7280` | Texto secundario |
-| `border` | `#E5E7EB` | Bordes sutiles |
-
-### Tipografía
-
-| Elemento | Font | Peso | Tamaño |
-|----------|------|------|--------|
-| Heading 1 | Inter | 700 | 3rem (48px) |
-| Heading 2 | Inter | 700 | 2.25rem (36px) |
-| Heading 3 | Inter | 600 | 1.5rem (24px) |
-| Body | Inter | 400 | 1rem (16px) |
-| Small | Inter | 400 | 0.875rem (14px) |
-| Label | Inter | 500 | 0.75rem (12px) |
+La fuente de verdad es `tailwind.config.ts` y la sección "Sistema de diseño"
+del README. Resumen: fondo `ink` (#07090D), texto `chrome` en tres niveles,
+rojo `signal` y azul `volt` tomados del emblema. Titulares en Archivo
+expandida, texto en IBM Plex Sans y rótulos en IBM Plex Mono.
 
 ### Espaciado
 
@@ -210,13 +193,12 @@ servitek-web/
 
 | Componente | Descripción |
 |------------|-------------|
-| `Hero` | Hero principal con imagen de fondo |
-| `TrustBar` | Barra de indicadores de confianza |
+| `Hero` | Titular, contactos directos y emblema montado como instrumento (`EmblemStage`) |
+| `TrustBar` | Banda continua con sellos y unidades de negocio |
 | `ValueProposition` | Propuesta de valor |
-| `BusinessUnits` | Las 4 unidades de negocio |
+| `BusinessUnits` | Índice interactivo de las 5 unidades de negocio |
 | `WhyServitek` | Sección "Por qué SERVITEK" |
 | `SectorsPreview` | Preview de sectores |
-| `ProjectsPreview` | Preview de proyectos |
 | `CTASection` | Call-to-action final |
 
 ### UI
@@ -357,7 +339,7 @@ Archivos generados: `sitemap.xml` y `robots.txt` en `public/`
 ### Nomenclatura
 
 ```
-hero-industrial.webp
+planta-industrial.webp
 service-iluminacion.webp
 sector-agroindustria.webp
 project-frigorifico-01.webp
@@ -589,7 +571,7 @@ El JSON-LD se define en `src/lib/schema.ts` y se inyecta en el `<head>` desde `s
   "alternateName": "SERVITEK",
   "description": "...",
   "url": "https://servitek.com.py",
-  "logo": "https://servitek.com.py/images/logo/logo-principal.webp",
+  "logo": "https://servitek.com.py/images/brand/servitek-logo.png",
   "identifier": {
     "@type": "PropertyValue",
     "propertyID": "RUC",

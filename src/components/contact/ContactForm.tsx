@@ -82,17 +82,17 @@ export function ContactForm() {
       {sent && (
         <div
           role="status"
-          className="mb-8 flex animate-fade-up items-start gap-3 rounded-md border border-success/40 bg-success/10 p-5"
+          className="mb-8 flex animate-rise items-start gap-3 rounded-2xl border border-success/40 bg-success/10 p-5"
         >
           <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-success" aria-hidden="true" />
-          <div className="text-sm text-white/80">
-            <p className="font-semibold text-white">Se abrió WhatsApp con su consulta.</p>
+          <div className="text-sm text-chrome-2">
+            <p className="font-semibold text-chrome">Se abrió WhatsApp con su consulta.</p>
             <p className="mt-1">
               Recuerde pulsar enviar dentro de WhatsApp para que nos llegue. Si no se abrió,
               escríbanos a{' '}
               <a
                 href={`mailto:${company.contact.email}`}
-                className="text-blue-text underline underline-offset-2"
+                className="text-volt-text underline underline-offset-2"
               >
                 {company.contact.email}
               </a>
@@ -104,10 +104,7 @@ export function ContactForm() {
 
       <form onSubmit={handleSubmit(onSubmit, onInvalid)} noValidate className="space-y-7">
         <div>
-          <label
-            htmlFor="name"
-            className="mb-2 block font-mono text-eyebrow uppercase text-white/60"
-          >
+          <label htmlFor="name" className="field-label">
             Nombre completo <span aria-hidden="true">*</span>
           </label>
           <input
@@ -127,10 +124,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="company"
-            className="mb-2 block font-mono text-eyebrow uppercase text-white/60"
-          >
+          <label htmlFor="company" className="field-label">
             Empresa <span aria-hidden="true">*</span>
           </label>
           <input
@@ -151,10 +145,7 @@ export function ContactForm() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label
-              htmlFor="phone"
-              className="mb-2 block font-mono text-eyebrow uppercase text-white/60"
-            >
+            <label htmlFor="phone" className="field-label">
               Teléfono <span aria-hidden="true">*</span>
             </label>
             <input
@@ -175,10 +166,7 @@ export function ContactForm() {
           </div>
 
           <div>
-            <label
-              htmlFor="city"
-              className="mb-2 block font-mono text-eyebrow uppercase text-white/60"
-            >
+            <label htmlFor="city" className="field-label">
               Ciudad <span aria-hidden="true">*</span>
             </label>
             <input
@@ -199,18 +187,15 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="serviceType"
-            className="mb-2 block font-mono text-eyebrow uppercase text-white/60"
-          >
+          <label htmlFor="serviceType" className="field-label">
             Tipo de servicio <span aria-hidden="true">*</span>
           </label>
           <select id="serviceType" {...register('serviceType')} {...fieldProps('serviceType')}>
-            <option value="" className="bg-navy">
+            <option value="" className="bg-ink">
               Elija un servicio
             </option>
             {serviceOptions.map((option) => (
-              <option key={option} value={option} className="bg-navy">
+              <option key={option} value={option} className="bg-ink">
                 {option}
               </option>
             ))}
@@ -224,10 +209,7 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="message"
-            className="mb-2 block font-mono text-eyebrow uppercase text-white/60"
-          >
+          <label htmlFor="message" className="field-label">
             Mensaje <span aria-hidden="true">*</span>
           </label>
           <textarea
@@ -263,16 +245,16 @@ export function ContactForm() {
               {...register('privacy')}
               aria-invalid={errors.privacy ? 'true' : 'false'}
               aria-describedby={errors.privacy ? 'privacy-error' : undefined}
-              className="mt-px h-6 w-6 shrink-0 cursor-pointer accent-blue-solid"
+              className="mt-px h-6 w-6 shrink-0 cursor-pointer accent-volt-solid"
             />
-            <label htmlFor="privacy" className="cursor-pointer py-1 text-sm text-white/70">
+            <label htmlFor="privacy" className="cursor-pointer py-1 text-sm text-chrome-2">
               He leído y acepto la Política de Privacidad <span aria-hidden="true">*</span>
             </label>
           </div>
           <p className="mt-1.5 pl-8 text-sm">
             <Link
               href="/politica-de-privacidad"
-              className="text-blue-text underline underline-offset-2"
+              className="text-volt-text underline underline-offset-2"
             >
               Leer la Política de Privacidad
             </Link>
@@ -285,39 +267,35 @@ export function ContactForm() {
           )}
         </div>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="btn btn-primary w-full px-8 py-4 text-sm tracking-[0.08em] disabled:cursor-not-allowed disabled:opacity-50"
-        >
+        <button type="submit" disabled={isSubmitting} className="btn btn-chrome min-h-14 w-full">
           {isSubmitting ? (
             <>
               {/* Indicador de envío: anillo girando, no un cambio de texto seco. */}
               <span
                 aria-hidden="true"
-                className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"
+                className="h-4 w-4 animate-spin rounded-full border-2 border-ink/30 border-t-ink"
               />
-              ENVIANDO
+              Enviando
             </>
           ) : (
             <>
-              ENVIAR POR WHATSAPP
+              Enviar por WhatsApp
               <ArrowRight className="btn-icon h-4 w-4" aria-hidden="true" />
             </>
           )}
         </button>
 
-        <p className="text-center text-xs text-white/60">
+        <p className="text-center text-xs text-chrome-muted">
           Al enviar se abrirá WhatsApp con sus datos ya escritos. Debe pulsar enviar allí para que
           la consulta nos llegue.
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-line pt-5 text-center text-sm text-white/70">
-          <Mail className="h-4 w-4 shrink-0 text-blue-text" aria-hidden="true" />
+        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-line pt-5 text-center text-sm text-chrome-2">
+          <Mail className="h-4 w-4 shrink-0 text-volt-text" aria-hidden="true" />
           <span>¿Prefiere el correo? Escríbanos a</span>
           <a
             href={`mailto:${company.contact.email}`}
-            className="break-all text-blue-text underline underline-offset-2"
+            className="break-all text-volt-text underline underline-offset-2"
           >
             {company.contact.email}
           </a>

@@ -24,8 +24,8 @@ const CHANNELS = [
     href: company.social.instagram,
     external: true,
     Icon: Instagram,
-    accent: 'group-hover:border-accent group-hover:bg-accent',
-    ring: 'focus-visible:ring-accent',
+    accent: 'group-hover:border-signal group-hover:bg-signal',
+    ring: 'focus-visible:ring-signal-text',
   },
   {
     id: 'email',
@@ -33,8 +33,8 @@ const CHANNELS = [
     href: `mailto:${company.contact.email}`,
     external: false,
     Icon: Mail,
-    accent: 'group-hover:border-blue-solid group-hover:bg-blue-solid',
-    ring: 'focus-visible:ring-blue-text',
+    accent: 'group-hover:border-volt-solid group-hover:bg-volt-solid',
+    ring: 'focus-visible:ring-volt-text',
   },
   {
     id: 'whatsapp',
@@ -65,7 +65,7 @@ export function SocialLinks() {
             href={href}
             aria-label={external ? `${label} (se abre en una pestaña nueva)` : label}
             {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            className={`flex h-12 w-12 items-center justify-center rounded-full border border-line bg-surface-card text-white/70 transition-[transform,background-color,border-color,color] duration-base ease-out-expo group-hover:-translate-y-1 group-hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-navy ${accent} ${ring}`}
+            className={`flex h-12 w-12 items-center justify-center rounded-full border border-line bg-ink-3 text-chrome-2 transition-[transform,background-color,border-color,color] duration-base ease-out-expo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink group-hover:-translate-y-1 group-hover:text-white ${accent} ${ring}`}
           >
             <Icon className="h-6 w-6" />
           </a>
@@ -77,12 +77,12 @@ export function SocialLinks() {
               y el icono al aparecer. */}
           <span
             aria-hidden="true"
-            className={`pointer-events-none absolute bottom-full left-0 z-10 mb-3 translate-y-1 whitespace-nowrap rounded-md border border-line bg-surface-card px-3 py-1.5 font-mono text-xs text-white opacity-0 transition-[opacity,transform,background-color,border-color] duration-base ease-out-expo group-hover:translate-y-0 group-hover:opacity-100 ${accent}`}
+            className={`pointer-events-none absolute bottom-full left-0 z-10 mb-3 translate-y-1 whitespace-nowrap rounded-md border border-line bg-ink-4 px-3 py-1.5 font-mono text-xs text-white opacity-0 transition-[opacity,transform,background-color,border-color] duration-base ease-out-expo group-hover:translate-y-0 group-hover:opacity-100 ${accent}`}
           >
             {label}
             {/* Punta del globo, alineada con el centro del icono (48 px). */}
             <span
-              className={`absolute -bottom-[5px] left-6 h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-line bg-surface-card transition-[background-color,border-color] duration-base ease-out-expo ${accent}`}
+              className={`absolute -bottom-[5px] left-6 h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-line bg-ink-4 transition-[background-color,border-color] duration-base ease-out-expo ${accent}`}
             />
           </span>
         </li>

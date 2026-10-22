@@ -13,7 +13,7 @@ export function generateOrganizationSchema() {
     alternateName: company.name,
     description: company.description,
     url: SITE_URL,
-    logo: absoluteUrl('/images/logo/logo-principal.webp'),
+    logo: absoluteUrl('/images/brand/servitek-logo.png'),
     image: absoluteUrl('/og-image.jpg'),
     identifier: {
       '@type': 'PropertyValue',

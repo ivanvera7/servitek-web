@@ -165,8 +165,7 @@ export const services: Service[] = [
       "Grupos electrógenos",
       "Mantenimiento preventivo de generadores",
       "Filtros, lubricantes y correas",
-      "Baterías de respaldo",
-      "Guardia técnica 24/7"
+      "Baterías de respaldo"
     ],
     technicalScope: [
       "Diseño de distribución eléctrica",

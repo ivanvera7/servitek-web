@@ -5,62 +5,36 @@ import { ServiceIcon } from '@/lib/icons';
 
 interface ServiceCardProps {
   service: Service;
-  /** Posición en la lista. Alimenta la numeración 01, 02, 03... */
+  /** Posición en la lista: alimenta la numeración 01, 02, 03... */
   index?: number;
 }
 
 export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
-  const number = String(index + 1).padStart(2, '0');
-
   return (
     <Link
       href={`/servicios/${service.slug}`}
-      className="card-dark group relative flex h-full flex-col overflow-hidden p-6 sm:p-8"
+      className="panel panel-hover group flex h-full flex-col overflow-hidden p-7 sm:p-9"
     >
-      {/* Marca de agua con el número de unidad */}
-      <span aria-hidden="true" className="index-watermark -top-4 right-1 text-[110px]">
-        {number}
-      </span>
-
-      <div className="tech-frame" aria-hidden="true" />
-
-      {/* Cabecera: índice + rótulo + filete que se extiende en hover */}
-      <div className="relative flex items-center gap-3">
-        <span className="index-number">{number}</span>
-        <span
-          aria-hidden="true"
-          className="h-px w-6 bg-accent/50 transition-[width] duration-base ease-out-expo group-hover:w-12"
-        />
-        <span className="eyebrow text-white/55">UNIDAD DE NEGOCIO</span>
-      </div>
-
-      {/* min-w-0: sin él, el ancho min-content de palabras largas
-          ("INFRAESTRUCTURA") desbordaba la tarjeta a 320 px. */}
-      <div className="relative mt-6 flex min-w-0 flex-1 items-start gap-5 sm:gap-6">
-        <div className="shrink-0 rounded-lg bg-blue/10 p-3 text-blue-text transition-[background-color,color,transform] duration-base ease-out-expo group-hover:-translate-y-0.5 group-hover:bg-blue-solid group-hover:text-white sm:p-4">
-          <ServiceIcon name={service.icon} className="h-8 w-8" />
-        </div>
-
-        <div className="flex min-w-0 flex-1 flex-col">
-          <h3 className="text-h3 text-white transition-colors duration-base group-hover:text-blue-text">
-            {service.shortTitle}
-          </h3>
-          <p className="mt-3 leading-relaxed text-white/65">{service.description}</p>
-        </div>
-      </div>
-
-      {/* Pie: alineado abajo, así las tarjetas de una fila cierran a la misma
-          altura aunque las descripciones midan distinto. */}
-      <div className="relative mt-7 flex items-center justify-between border-t border-line pt-5">
-        <span className="inline-flex items-center text-sm font-medium text-white/75 transition-colors duration-base group-hover:text-blue-text">
-          {service.cta}
-          <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-base ease-out-expo group-hover:translate-x-1.5" />
+      <div className="flex items-start justify-between gap-6">
+        <span className="number-index">UNIDAD {String(index + 1).padStart(2, '0')}</span>
+        <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-line-strong bg-ink-4 text-volt-text transition-[background-color,color,border-color] duration-base ease-out-expo group-hover:border-chrome group-hover:bg-chrome group-hover:text-ink">
+          <ServiceIcon name={service.icon} className="h-6 w-6" />
         </span>
-        <span
-          aria-hidden="true"
-          className="h-1.5 w-1.5 rounded-full bg-accent opacity-0 transition-opacity duration-base group-hover:opacity-100"
-        />
       </div>
+
+      {/* min-w-0: "INFRAESTRUCTURA" no debe desbordar a 320 px. */}
+      <div className="mt-10 min-w-0 flex-1">
+        <h3 className="text-h3 font-semibold">{service.shortTitle}</h3>
+        <p className="mt-4 leading-relaxed text-chrome-muted">{service.description}</p>
+      </div>
+
+      <span className="mt-10 inline-flex items-center gap-2 border-t border-line pt-6 font-mono text-xs uppercase tracking-[0.14em] text-chrome-2 transition-colors duration-base group-hover:text-chrome">
+        {service.cta}
+        <ArrowRight
+          className="h-4 w-4 transition-transform duration-base ease-out-expo group-hover:translate-x-1.5"
+          aria-hidden="true"
+        />
+      </span>
     </Link>
   );
 }

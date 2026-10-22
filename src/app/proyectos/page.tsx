@@ -18,23 +18,23 @@ export default function ProyectosPage() {
   return (
     <>
       <PageHero
-        eyebrow="PROYECTOS"
-        title="Nuestros Proyectos"
+        eyebrow="Proyectos"
+        title="Nuestros proyectos"
         subtitle="Soluciones ejecutadas para la industria paraguaya."
       />
 
-      <section className="section-padding bg-navy">
-        <div className="container-custom">
+      <section className="section pt-8 md:pt-12">
+        <div className="container-site">
           <h2 className="sr-only">Listado de proyectos</h2>
           {/* Nota sobre proyectos demo */}
-          <div className="card-dark mb-8 p-6">
-            <p className="text-sm text-white/60">
-              <strong className="text-white/70">Nota:</strong> Los proyectos mostrados son de
-              ejemplo. SERVITEK está preparando su portafolio de proyectos reales.
+          <div className="panel mb-8 p-6">
+            <p className="text-sm text-chrome-muted">
+              <strong className="font-medium text-chrome-2">Nota:</strong> Los proyectos mostrados
+              son de ejemplo. SERVITEK está preparando su portafolio de proyectos reales.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             {projects.map((project, index) => (
               <ScrollReveal key={project.id} delay={index * 90} fullHeight>
                 <ProjectCard project={project} index={index} />

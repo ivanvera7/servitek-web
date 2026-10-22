@@ -4,11 +4,11 @@ import { ValueProposition } from '@/components/sections/ValueProposition';
 import { BusinessUnits } from '@/components/sections/BusinessUnits';
 import { WhyServitek } from '@/components/sections/WhyServitek';
 import { SectorsPreview } from '@/components/sections/SectorsPreview';
-// PENDIENTE (empresa): reactivar junto con <ProjectsPreview /> más abajo.
-// import { ProjectsPreview } from '@/components/sections/ProjectsPreview';
 import { OfficialDistributor } from '@/components/sections/OfficialDistributor';
 import { CTASection } from '@/components/sections/CTASection';
 
+// PENDIENTE (empresa): cuando haya proyectos reales, añadir aquí un avance de
+// /proyectos con <ProjectCard /> (la página y la tarjeta ya existen).
 export default function Home() {
   return (
     <>
@@ -18,8 +18,6 @@ export default function Home() {
       <BusinessUnits />
       <WhyServitek />
       <SectorsPreview />
-      {/* PENDIENTE (empresa): reactivar cuando haya proyectos reales que mostrar. */}
-      {/* <ProjectsPreview /> */}
       <OfficialDistributor />
       <CTASection />
     </>

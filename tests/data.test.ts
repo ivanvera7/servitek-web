@@ -28,6 +28,27 @@ describe('rutas de imagen', () => {
   });
 });
 
+describe('recursos de marca', () => {
+  // Rutas escritas en Brand.tsx, layout.tsx, schema.ts y el manifest.
+  const marca = [
+    'images/brand/servitek-logo.webp',
+    'images/brand/servitek-logo.png',
+    'images/brand/servitek-emblema.webp',
+    'images/hero/planta-industrial.webp',
+    'images/hero/planta-industrial-960.webp',
+    'favicon.ico',
+    'apple-touch-icon.png',
+    'icon-192x192.png',
+    'icon-512x512.png',
+    'og-image.jpg',
+  ];
+
+  it('existen en public/', () => {
+    const faltan = marca.filter((r) => !existsSync(path.join(PUBLIC, r)));
+    expect(faltan).toEqual([]);
+  });
+});
+
 describe('slugs', () => {
   it('no hay slugs de servicio repetidos', () => {
     const slugs = services.map((s) => slugify(s.slug));

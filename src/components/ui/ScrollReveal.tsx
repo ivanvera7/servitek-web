@@ -9,13 +9,15 @@ import { cn } from '@/lib/utils';
  * para romper la monotonía en bloques de dos columnas (`left`/`right`) y en
  * piezas centradas (`scale`), no para aplicarlos en todas partes.
  */
-type RevealDirection = 'up' | 'left' | 'right' | 'scale';
+type RevealDirection = 'up' | 'left' | 'right' | 'scale' | 'clip';
 
 const hiddenTransform: Record<RevealDirection, string> = {
   up: 'translate-y-6',
   left: '-translate-x-8',
   right: 'translate-x-8',
   scale: 'scale-[0.96]',
+  // Imágenes: la pieza se abre desde dentro como un obturador.
+  clip: '[clip-path:inset(10%_10%_10%_10%_round_24px)] scale-[1.04]',
 };
 
 interface ScrollRevealProps {
@@ -94,11 +96,13 @@ export function ScrollReveal({
     <div
       ref={ref}
       className={cn(
-        'transition-[opacity,transform] duration-slow ease-out-expo motion-reduce:transition-none',
+        'transition-[opacity,transform,clip-path] ease-out-expo motion-reduce:transition-none',
+        direction === 'clip' ? 'duration-[1200ms]' : 'duration-slow',
         fullHeight && 'h-full',
         hidden
           ? `${hiddenTransform[direction]} opacity-0`
           : 'translate-x-0 translate-y-0 scale-100 opacity-100',
+        direction === 'clip' && !hidden && '[clip-path:inset(0_0_0_0_round_24px)]',
         className
       )}
       style={hidden ? undefined : { transitionDelay: `${delay}ms` }}

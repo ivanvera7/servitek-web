@@ -1,89 +1,65 @@
-import Image from 'next/image';
+import { Emblem } from '@/components/ui/Brand';
+import { Breadcrumbs, type BreadcrumbItem } from '@/components/ui/Breadcrumbs';
 import { cn } from '@/lib/utils';
 
 interface PageHeroProps {
   title: string;
   subtitle?: string;
-  className?: string;
   /** Rótulo monoespaciado sobre el título (SERVICIOS, SECTOR 03...). */
   eyebrow?: string;
-  /** Imagen de fondo opcional (portada de servicio o proyecto). */
-  image?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  className?: string;
 }
 
 /**
- * Cabecera compartida por todas las páginas internas.
- *
- * Hereda la coreografía del hero de portada — rótulo, titular y bajada entran
- * escalonados — pero en versión corta (sin parallax ni retardos largos): es
- * una cabecera de sección, no una portada, y el visitante ya viene navegando.
+ * Cabecera de las páginas internas. Misma coreografía que la portada en
+ * versión corta: ruta, rótulo, titular y bajada entran escalonados, y el
+ * emblema asoma recortado a la derecha como marca de agua.
  */
-export function PageHero({ title, subtitle, className, eyebrow, image }: PageHeroProps) {
+export function PageHero({ title, subtitle, eyebrow, breadcrumbs, className }: PageHeroProps) {
   return (
-    <section
-      className={cn(
-        'relative overflow-hidden border-b border-line bg-surface/92',
-        'pb-16 pt-14 md:pb-24 md:pt-20',
-        className
-      )}
-    >
-      {/* Imagen de fondo opcional */}
-      {image && (
-        <div className="absolute inset-0" aria-hidden="true">
-          <Image
-            src={image}
-            alt=""
-            fill
-            className="animate-fade-in object-cover opacity-30"
-            sizes="100vw"
-            priority
-          />
-          <div className="via-surface/92 absolute inset-0 bg-gradient-to-r from-surface to-surface/70" />
-        </div>
-      )}
+    <section className={cn('relative overflow-hidden pb-16 pt-12 md:pb-24 md:pt-20', className)}>
+      <div className="grid-lines" aria-hidden="true" />
 
-      <div className="tech-grid opacity-70" aria-hidden="true" />
-
-      {/* Filete vertical de acento, alineado con el margen del contenido */}
       <div
         aria-hidden="true"
-        className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-accent-deep/50 via-blue/25 to-transparent"
-      />
+        className="pointer-events-none absolute -right-24 top-1/2 hidden w-[34rem] -translate-y-1/2 opacity-[0.13] md:block lg:-right-10"
+      >
+        {/* La animación va en una capa interior: su fotograma final
+            (opacity 1) anularía la opacidad de la marca de agua. */}
+        <div className="animate-fade-in" style={{ animationDelay: '200ms' }}>
+          <Emblem shine={false} sizes="34rem" />
+        </div>
+      </div>
 
-      <div className="container-custom relative z-10">
+      <div className="container-site relative">
+        {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="mb-10 animate-rise md:mb-14" />}
+
         {eyebrow && (
-          <div className="mb-6 flex animate-fade-up items-center gap-3">
-            <span className="status-dot" aria-hidden="true" />
-            <span className="eyebrow">{eyebrow}</span>
-            <span
-              aria-hidden="true"
-              className="h-px w-12 bg-gradient-to-r from-blue/60 to-transparent"
-            />
-          </div>
+          <span className="eyebrow animate-rise" style={{ animationDelay: '60ms' }}>
+            {eyebrow}
+          </span>
         )}
 
         <h1
-          className="max-w-4xl animate-fade-up text-balance text-display text-white"
-          style={{ animationDelay: '70ms' }}
+          className="mt-6 max-w-4xl animate-rise text-h1 font-semibold"
+          style={{ animationDelay: '120ms' }}
         >
           {title}
         </h1>
 
         {subtitle && (
           <p
-            className="mt-6 max-w-3xl animate-fade-up text-lg leading-relaxed text-white/70"
-            style={{ animationDelay: '180ms' }}
+            className="mt-7 max-w-2xl animate-rise text-lead text-chrome-2"
+            style={{ animationDelay: '200ms' }}
           >
             {subtitle}
           </p>
         )}
+      </div>
 
-        {/* Filete de cierre: se dibuja de izquierda a derecha al cargar. */}
-        <div
-          aria-hidden="true"
-          className="rule-accent mt-10 origin-left animate-line-grow"
-          style={{ animationDelay: '280ms' }}
-        />
+      <div className="container-site relative mt-14 md:mt-20">
+        <div className="conductor" aria-hidden="true" />
       </div>
     </section>
   );

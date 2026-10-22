@@ -15,42 +15,28 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="relative flex min-h-[70vh] items-center overflow-hidden bg-navy py-24">
-      <div className="tech-grid" aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-accent-deep/50 via-blue/25 to-transparent"
-      />
+    <div className="relative flex min-h-[70vh] items-center overflow-hidden py-24">
+      <div className="grid-lines" aria-hidden="true" />
 
-      <div className="container-custom relative z-10 max-w-2xl">
-        <span className="inline-flex animate-fade-up items-center gap-3">
-          <span className="status-dot animate-accent-blink" aria-hidden="true" />
-          <span className="eyebrow">FALLO INESPERADO</span>
-        </span>
+      <div className="container-site relative max-w-2xl">
+        <span className="eyebrow animate-rise">Fallo inesperado</span>
 
-        <h1
-          className="mt-6 animate-fade-up text-balance text-h1 text-white"
-          style={{ animationDelay: '80ms' }}
-        >
+        <h1 className="mt-6 animate-rise text-h1 font-semibold" style={{ animationDelay: '80ms' }}>
           Algo ha salido mal
         </h1>
 
         <p
-          className="mt-5 animate-fade-up text-lg leading-relaxed text-white/65"
+          className="mt-5 animate-rise text-lead text-chrome-2"
           style={{ animationDelay: '180ms' }}
         >
           No hemos podido cargar esta parte del sitio. Vuelva a intentarlo; si el problema persiste,
           escríbanos y lo revisamos.
         </p>
 
-        <div className="mt-10 animate-fade-up" style={{ animationDelay: '280ms' }}>
-          <button
-            type="button"
-            onClick={() => reset()}
-            className="btn btn-primary px-7 py-4 text-sm tracking-[0.06em]"
-          >
+        <div className="mt-10 animate-rise" style={{ animationDelay: '280ms' }}>
+          <button type="button" onClick={() => reset()} className="btn btn-chrome">
             <RotateCcw className="h-4 w-4" aria-hidden="true" />
-            INTENTAR DE NUEVO
+            Intentar de nuevo
           </button>
         </div>
       </div>

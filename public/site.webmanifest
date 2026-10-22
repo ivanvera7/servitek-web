@@ -1,7 +1,7 @@
 {
   "name": "SERVITEK",
   "short_name": "SERVITEK",
-  "description": "Soluciones de ingeniería eléctrica y electromecánica en Paraguay",
+  "description": "Electromecánica industrial y servicios eléctricos de alta exigencia en Paraguay",
   "icons": [
     {
       "src": "/icon-192x192.png",
@@ -11,11 +11,12 @@
     {
       "src": "/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#061321",
-  "background_color": "#061321",
+  "theme_color": "#07090D",
+  "background_color": "#07090D",
   "display": "standalone",
   "scope": "/",
   "start_url": "/"

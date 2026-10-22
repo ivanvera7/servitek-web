@@ -1,22 +1,15 @@
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { absoluteUrl } from '@/lib/site';
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   label: string;
   href: string;
 }
 
-interface BreadcrumbsProps {
-  items: BreadcrumbItem[];
-  className?: string;
-}
-
-export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
+/** Ruta de navegación con su BreadcrumbList para los buscadores. */
+export function Breadcrumbs({ items, className }: { items: BreadcrumbItem[]; className?: string }) {
   const trail = [{ label: 'Inicio', href: '/' }, ...items];
 
-  // BreadcrumbList: Google lo usa para mostrar la ruta en los resultados.
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -29,40 +22,33 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
   };
 
   return (
-    <>
+    <nav aria-label="Ruta de navegación" className={className}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <nav
-        aria-label="Ruta de navegación"
-        className={cn('border-b border-line bg-navy py-4', className)}
-      >
-        <ol className="container-custom flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] text-white/55">
-          {trail.map((item, index) => {
-            const isLast = index === trail.length - 1;
-            return (
-              <li key={item.href} className="flex items-center gap-2">
-                {index > 0 && (
-                  <ChevronRight className="h-3.5 w-3.5 shrink-0 text-white/25" aria-hidden="true" />
-                )}
-                {isLast ? (
-                  <span className="text-accent" aria-current="page">
-                    {item.label}
-                  </span>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className="link-underline transition-colors duration-fast hover:text-white"
-                  >
-                    {item.label}
-                  </Link>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </nav>
-    </>
+      <ol className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs uppercase tracking-[0.14em] text-chrome-muted">
+        {trail.map((item, index) => {
+          const isLast = index === trail.length - 1;
+          return (
+            <li key={item.href} className="flex items-center gap-3">
+              {index > 0 && <span aria-hidden="true" className="h-px w-4 bg-chrome-dim" />}
+              {isLast ? (
+                <span className="text-chrome-2" aria-current="page">
+                  {item.label}
+                </span>
+              ) : (
+                <Link
+                  href={item.href}
+                  className="link-u py-1 transition-colors duration-fast hover:text-chrome"
+                >
+                  {item.label}
+                </Link>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
   );
 }

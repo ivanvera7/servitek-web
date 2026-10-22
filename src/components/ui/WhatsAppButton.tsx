@@ -20,13 +20,13 @@ export function WhatsAppButton() {
       onClick={() => trackWhatsAppClick()}
       /* Entrada solo con opacidad: `fade-up` deja fijado un `transform` al
          terminar (fill-mode: both) y anularía el `hover:scale-105`. */
-      className="group fixed bottom-6 right-6 z-50 inline-flex h-14 w-14 animate-fade-in items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition-[transform,background-color,box-shadow] duration-base ease-out-expo hover:scale-105 hover:bg-whatsapp-hover hover:shadow-[0_0_28px_rgb(37_211_102_/_0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-whatsapp-ring focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+      className="group fixed bottom-6 right-6 z-50 inline-flex h-14 w-14 animate-fade-in items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition-[transform,background-color,box-shadow] duration-base ease-out-expo hover:scale-105 hover:bg-whatsapp-hover hover:shadow-[0_0_28px_rgb(37_211_102_/_0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-whatsapp-ring focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
       style={{ animationDelay: '700ms' }}
       aria-label="Contactar por WhatsApp (se abre en una pestaña nueva)"
     >
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 animate-pulse-green rounded-full"
+        className="pointer-events-none absolute inset-0 animate-pulse-ring rounded-full bg-whatsapp-ring/40"
         style={{ animationDelay: '1.4s' }}
       />
       <svg

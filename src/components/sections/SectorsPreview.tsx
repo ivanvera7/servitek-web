@@ -1,88 +1,46 @@
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { SectorCard } from '@/components/sectors/SectorCard';
+import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { sectors } from '@/data/sectors';
+import { cn } from '@/lib/utils';
 
-/**
- * Avance de sectores.
- *
- * Versión compacta de SectorCard: cuatro columnas no admiten la lista de
- * problemas sin apelmazarse, así que aquí solo van índice, título y resumen.
- * El lenguaje visual (numeración, marca de agua, filete rojo) es el mismo.
- */
+/** Rejilla asimétrica: dos sectores anchos arriba, tres abajo. */
 export function SectorsPreview() {
-  const featuredSectors = sectors.slice(0, 4);
-
   return (
-    <section className="section-padding bg-navy-light/92">
-      <div className="container-custom">
-        <ScrollReveal>
-          <SectionHeading
-            eyebrow="SECTORES"
-            title="Sectores que atendemos"
-            description="Soluciones especializadas para los sectores industriales más exigentes de Paraguay."
-            className="mb-14 md:mb-20"
-          />
-        </ScrollReveal>
-
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {featuredSectors.map((sector, index) => {
-            const number = String(index + 1).padStart(2, '0');
-            return (
-              <ScrollReveal key={sector.id} delay={index * 90} fullHeight>
-                <Link
-                  href={`/sectores/${sector.slug}`}
-                  className="card-dark group relative flex h-full flex-col overflow-hidden p-6"
-                >
-                  <span aria-hidden="true" className="index-watermark -top-3 right-1 text-[84px]">
-                    {number}
-                  </span>
-
-                  <div className="tech-frame" aria-hidden="true" />
-
-                  <div className="relative flex items-center gap-3">
-                    <span className="index-number">{number}</span>
-                    <span
-                      aria-hidden="true"
-                      className="h-px w-5 bg-accent/50 transition-[width] duration-base ease-out-expo group-hover:w-10"
-                    />
-                  </div>
-
-                  <h3 className="relative mt-5 text-h4 text-white transition-colors duration-base group-hover:text-blue-text">
-                    {sector.shortTitle}
-                  </h3>
-                  <p className="relative mt-2.5 line-clamp-3 flex-1 text-sm leading-relaxed text-white/65">
-                    {sector.description}
-                  </p>
-
-                  <div className="relative mt-6 flex items-center justify-between border-t border-line pt-4">
-                    <span className="inline-flex items-center text-sm font-medium text-white/75 transition-colors duration-base group-hover:text-blue-text">
-                      Ver soluciones
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-base ease-out-expo group-hover:translate-x-1.5" />
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="h-1.5 w-1.5 rounded-full bg-accent opacity-0 transition-opacity duration-base group-hover:opacity-100"
-                    />
-                  </div>
-                </Link>
-              </ScrollReveal>
-            );
-          })}
+    <section className="section">
+      <div className="container-site">
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <ScrollReveal>
+            <SectionHeading
+              eyebrow="Sectores"
+              title="Sectores que atendemos"
+              description="Soluciones especializadas para los sectores industriales más exigentes de Paraguay."
+            />
+          </ScrollReveal>
+          <ScrollReveal delay={120}>
+            <Button href="/sectores" variant="ghost" className="shrink-0">
+              Ver sectores
+            </Button>
+          </ScrollReveal>
         </div>
 
-        <ScrollReveal>
-          <div className="mt-12 flex justify-center">
-            <Link
-              href="/sectores"
-              className="link-underline py-2 text-sm font-medium text-white/75 transition-colors duration-base hover:text-blue-text"
+        <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+          {sectors.map((sector, index) => (
+            <ScrollReveal
+              key={sector.id}
+              delay={(index % 3) * 90}
+              fullHeight
+              className={cn(
+                index < 2 ? 'lg:col-span-3' : 'lg:col-span-2',
+                // Con cinco en dos columnas, el último ocupa la fila entera.
+                index === sectors.length - 1 && 'md:col-span-2 lg:col-span-2'
+              )}
             >
-              Ver todos los sectores
-              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-            </Link>
-          </div>
-        </ScrollReveal>
+              <SectorCard sector={sector} index={index} compact />
+            </ScrollReveal>
+          ))}
+        </div>
       </div>
     </section>
   );

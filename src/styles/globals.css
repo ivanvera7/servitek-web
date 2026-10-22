@@ -5,449 +5,345 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* La cabecera es fija: sin este margen, al saltar a un ancla el título
-       queda debajo de la barra. */
+    /* Cabecera fija: sin esto, al saltar a un ancla el título queda debajo. */
     scroll-padding-top: 6rem;
-    /* `clip`, no `hidden`.
-       Varias capas decorativas (barridos, marcas de agua) y los revelados
-       direccionales del scroll se desplazan a propósito fuera de su caja, y
-       dejaban ~8 px de scroll horizontal. `overflow-x: hidden` aquí sí lo
-       quitaría, pero convierte a <html> en contenedor de scroll y rompe
-       `position: sticky` en toda la web — comprobado: la ficha de contacto
-       deja de fijarse. `clip` recorta sin crear contenedor de scroll, así
-       que no hay barra horizontal y sticky sigue funcionando.
-       Navegadores sin soporte de `clip` (Safari < 16) lo ignoran y se
-       quedan como antes: el recorte de <body> y, como mucho, esos 8 px. */
+    /* `clip` y no `hidden`: recorta las capas decorativas que sobresalen sin
+       convertir <html> en contenedor de scroll, que rompería `sticky`. */
     overflow-x: clip;
+    color-scheme: dark;
   }
 
   body {
-    @apply antialiased;
-    font-feature-settings: 'cv11', 'ss01';
-    background-color: theme('colors.navy.DEFAULT');
-    color: theme('colors.white');
-    /* Ninguna sección debe generar barra horizontal: varias capas
-       decorativas (barridos, glows, marcas de agua) sobresalen a propósito
-       de su contenedor. `hidden` primero como respaldo para navegadores sin
-       `clip`; en <body> no rompe sticky. */
+    @apply bg-ink font-sans text-chrome-2 antialiased;
     overflow-x: hidden;
     overflow-x: clip;
+    text-rendering: optimizeLegibility;
   }
 
-  /* Color de borde por defecto, para no repetirlo en cada utilidad. */
   * {
     border-color: theme('colors.line.DEFAULT');
   }
 
-  :focus-visible {
-    @apply outline-2 outline-offset-2 outline-blue-text;
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-chrome;
+    font-stretch: 112%;
+    text-wrap: balance;
   }
 
-  /* Cifras de ancho fijo en todo lo monoespaciado: los índices 01..05 y las
-     estadísticas no cambian de ancho al animarse ni al cambiar de valor. */
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: theme('colors.signal.DEFAULT');
+    color: #fff;
+  }
+
+  :focus-visible {
+    @apply rounded-sm outline-2 outline-offset-4 outline-volt-text;
+  }
+
   .font-mono {
     font-variant-numeric: tabular-nums;
   }
-}
 
-/* Ángulo del borde animado de las tarjetas. Va como @property para que el
-   navegador pueda interpolarlo: un custom property normal no se anima, y el
-   degradado cónico saltaría en vez de girar. Donde no haya soporte de
-   @property el borde se queda quieto, que es una degradación aceptable. */
-@property --card-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes card-border-spin {
-  to {
-    --card-angle: 360deg;
+  /* Barra de scroll discreta y acorde al cromo. */
+  @supports (scrollbar-color: auto) {
+    html {
+      scrollbar-color: theme('colors.chrome.dim') theme('colors.ink.DEFAULT');
+    }
   }
 }
 
 @layer components {
-  .container-custom {
-    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-10;
   }
 
-  .section-padding {
-    @apply py-20 md:py-28 lg:py-36;
+  .section {
+    @apply relative py-24 md:py-32;
   }
 
-  /* ------------------------------------------------------------------ *
-   * Tarjeta base
-   * ------------------------------------------------------------------ */
-
-  /* ------------------------------------------------------------------ *
-   * Lavado tipo aurora para el interior de las tarjetas: rojo arriba a la
-   * izquierda, blanco difuso en el centro alto y azul subiendo desde abajo
-   * a la derecha.
-   *
-   * Va en gradientes CSS y no con el componente Aurora, que es WebGL: una
-   * instancia por tarjeta serían diez canvas solo en la portada, por encima
-   * del límite de contextos WebGL que mantienen los navegadores.
-   *
-   * Las opacidades son bajas a propósito. El texto de las tarjetas baja
-   * hasta blanco al 65% y el contraste documentado en tailwind.config.ts se
-   * calculó sobre el color sólido: estos velos lo mueven de forma
-   * imperceptible, pero subirlos sí se lo comería.
-   * ------------------------------------------------------------------ */
-  .card-dark,
-  .card-glow {
-    background-image:
-      radial-gradient(85% 65% at 10% -5%, rgb(226 55 68 / 0.20) 0%, transparent 62%),
-      radial-gradient(60% 45% at 52% 4%, rgb(255 255 255 / 0.07) 0%, transparent 68%),
-      radial-gradient(95% 75% at 92% 104%, rgb(8 120 249 / 0.26) 0%, transparent 64%),
-      radial-gradient(115% 75% at 50% 118%, rgb(8 120 249 / 0.16) 0%, transparent 62%);
-  }
-
-  .card-dark {
-    /* background-color en vez de bg-surface-card vía @apply: Tailwind no
-       resuelve el modificador de opacidad (/92) dentro de @apply para esta
-       versión. rgb(11 37 63) es surface.card de tailwind.config.ts; el 92%
-       deja dos puntos libres para que se entrevea el fondo Aurora (ver
-       Providers.tsx) detrás de cada tarjeta. El contraste documentado en
-       tailwind.config.ts se calculó sobre el color sólido y no cambia de
-       forma perceptible con un 8% de transparencia sobre un fondo igual de
-       oscuro. */
-    @apply relative rounded-[14px] border border-line;
-    background-color: rgb(11 37 63 / 92%);
-    @apply transition-[transform,border-color,box-shadow] duration-base ease-out-expo;
-  }
-
-  /* ------------------------------------------------------------------ *
-   * Borde animado: un degradado cónico rojo → blanco → azul que da la
-   * vuelta a la tarjeta. La máscara (content-box xor borde) deja visible
-   * solo el anillo de 1 px, así que nunca tapa el contenido.
-   *
-   * Va en `.card-dark` y también en `.card-glow`, que existe para los
-   * paneles que quieren el borde pero no la elevación al pasar por encima
-   * (ver ContactInfo).
-   * ------------------------------------------------------------------ */
-
-  .card-dark::before,
-  .card-glow::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    border-radius: inherit;
-    padding: 1px;
-    background: conic-gradient(
-      from var(--card-angle),
-      transparent 0deg,
-      theme('colors.accent.DEFAULT') 35deg,
-      #ffffff 65deg,
-      theme('colors.blue.DEFAULT') 95deg,
-      transparent 145deg,
-      transparent 360deg
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    animation: card-border-spin 6s linear infinite;
-  }
-
-  .card-dark:hover,
-  .card-dark:focus-visible,
-  .group:hover .card-dark {
-    border-color: theme('colors.blue.DEFAULT / 40%');
-    transform: translateY(-4px);
-    box-shadow: theme('boxShadow.lift');
-  }
-
-  /* Al pasar por encima el recorrido se acelera y el halo inferior sube. */
-  .card-dark:hover::before,
-  .card-dark:focus-visible::before,
-  .group:hover .card-dark::before,
-  .card-glow:hover::before {
-    animation-duration: 2.5s;
-  }
-
-  /* ------------------------------------------------------------------ *
-   * Marco técnico: dos escuadras opuestas, como la mira de un plano de
-   * ingeniería. Se aplica a un <div> vacío superpuesto sobre la tarjeta y
-   * aparece al hacer hover sobre el contenedor `.group`.
-   * ------------------------------------------------------------------ */
-
-  .tech-frame {
-    @apply pointer-events-none absolute inset-0 z-[2];
-  }
-
-  .tech-frame::before,
-  .tech-frame::after {
-    content: '';
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    opacity: 0;
-    pointer-events: none;
-    border-color: theme('colors.accent.DEFAULT');
-    transition:
-      opacity theme('transitionDuration.base') theme('transitionTimingFunction.out-expo'),
-      transform theme('transitionDuration.base') theme('transitionTimingFunction.out-expo');
-  }
-
-  .tech-frame::before {
-    top: 10px;
-    left: 10px;
-    border-top: 1px solid;
-    border-left: 1px solid;
-    transform: translate(4px, 4px);
-  }
-
-  .tech-frame::after {
-    bottom: 10px;
-    right: 10px;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
-    transform: translate(-4px, -4px);
-  }
-
-  .group:hover .tech-frame::before,
-  .group:hover .tech-frame::after,
-  .group:focus-visible .tech-frame::before,
-  .group:focus-visible .tech-frame::after {
-    opacity: 0.85;
-    transform: translate(0, 0);
-  }
-
-  /* ------------------------------------------------------------------ *
-   * Etiquetas y numeración
-   * ------------------------------------------------------------------ */
-
-  /* Eyebrow del sistema: rótulo monoespaciado versal. */
+  /* Rótulo técnico: mono versal con una marca roja delante. */
   .eyebrow {
-    @apply font-mono text-eyebrow uppercase text-blue-text;
+    @apply inline-flex items-center gap-3 font-mono text-eyebrow uppercase text-chrome-muted;
   }
-
-  /* Índice de ingeniería: 01 / 02 / 03. Rojo, monoespaciado, tabular. */
-  .index-number {
-    @apply font-mono text-index tabular-nums text-accent;
-  }
-
-  /* Marca de agua: el mismo número, gigante y casi invisible, detrás del
-     contenido de la tarjeta. */
-  .index-watermark {
-    @apply pointer-events-none absolute select-none font-mono font-bold leading-none text-white/[0.025];
-    @apply transition-colors duration-base ease-out-expo;
-  }
-
-  .group:hover .index-watermark {
-    color: rgb(255 77 94 / 0.06);
-  }
-
-  /* Piloto de estado: punto rojo con halo. Marca lo que está "activo". */
-  .status-dot {
-    @apply relative inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent;
-  }
-
-  .status-dot::after {
+  .eyebrow::before {
     content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 9999px;
-    border: 1px solid theme('colors.accent.DEFAULT / 35%');
+    @apply h-px w-6 shrink-0 bg-signal;
   }
 
-  /* ------------------------------------------------------------------ *
-   * Botones
-   * ------------------------------------------------------------------ */
-
-  /* Botón con luz que recorre el borde, adaptado de Uiverse
-     (MuhammadHasann / mean-bird-62) a la paleta de SERVITEK.
-     El original monta la luz sobre un <div class="dots_border"> extra y un
-     <span> para el texto. Aquí se resuelve con los dos pseudo-elementos, sin
-     marcado adicional: así el estilo entra en los botones que ya existen sin
-     tocar una sola página.
-     Ambos pseudo-elementos van en z-index negativo dentro de un `isolate`:
-     el texto de nuestros botones es un nodo suelto, no un <span> posicionado,
-     y en el orden de pintado de CSS un pseudo-elemento con z-index 0 le
-     pasaría por encima. */
-  .btn {
-    --btn-glow: theme('colors.blue.DEFAULT');
-    @apply relative isolate inline-flex items-center justify-center gap-2 font-semibold;
-    border-radius: var(--btn-radius, 9999px);
-    @apply transition-[background-color,color,box-shadow,transform,border-color] duration-base ease-out-expo;
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-text;
-    @apply focus-visible:ring-offset-2 focus-visible:ring-offset-navy;
-  }
-
-  /* Luz que da la vuelta al borde. Mismo recurso que el borde de las
-     tarjetas -cónico enmascarado- en vez del barrido rotado del original:
-     una sola capa, y `transform` en lugar de repintar la caja entera. */
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    padding: 1px;
-    background: conic-gradient(
-      from var(--card-angle),
-      transparent 0deg,
-      theme('colors.accent.DEFAULT') 30deg,
-      #ffffff 60deg,
-      theme('colors.blue.DEFAULT') 90deg,
-      transparent 140deg,
-      transparent 360deg
+  /* Texto cromado: la misma línea de horizonte que las letras del logotipo,
+     brillo arriba, reflejo oscuro a media altura y vuelta a la luz. */
+  .text-metal {
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e9ecf1 38%,
+      #9aa3b2 50%,
+      #d9dde5 62%,
+      #f4f6f9 100%
     );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    animation: card-border-spin 3s linear infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* Cada línea lleva su propio degradado al partir el texto. */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
-  /* Relleno que se enciende al pasar por encima. */
+  /* Filete con los tres colores del emblema. */
+  .rule-tricolor {
+    @apply h-px w-full;
+    background: linear-gradient(
+      90deg,
+      theme('colors.signal.DEFAULT'),
+      #dfe3ea 50%,
+      theme('colors.volt.DEFAULT')
+    );
+  }
+
+  /* Conductor: filete con un pulso de luz que lo recorre. */
+  .conductor {
+    @apply relative h-px w-full overflow-hidden bg-line;
+  }
+  .conductor::after {
+    content: '';
+    @apply absolute inset-y-0 left-0 w-1/4;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      theme('colors.signal.DEFAULT') 35%,
+      #fff 50%,
+      theme('colors.volt.DEFAULT') 65%,
+      transparent
+    );
+    animation: conductor 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+
+  /* ---------- Botones ---------- */
+  .btn {
+    @apply relative inline-flex min-h-12 items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-full px-7 font-mono text-[0.8125rem] font-medium uppercase tracking-[0.12em];
+    @apply transition-[transform,background-color,border-color,color,box-shadow] duration-base ease-out-expo;
+    @apply active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  /* Destello especular que cruza el botón al pasar por encima. */
   .btn::after {
     content: '';
-    position: absolute;
-    inset: 1px;
-    z-index: -2;
-    border-radius: inherit;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity theme('transitionDuration.base')
-      theme('transitionTimingFunction.out-expo');
+    @apply pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 opacity-0;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
   }
-
-  .btn:is(:hover, :focus-visible)::after {
-    opacity: 1;
+  @media (hover: hover) {
+    .btn:hover::after {
+      opacity: 1;
+      animation: sheen 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
   }
-
-  /* El original crece un 10%; a este ancho de botón eso se lee como un salto,
-     así que el aumento es la mitad. */
-  .btn:is(:hover, :focus-visible) {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 5px rgb(8 120 249 / 0.18);
+  .btn-icon {
+    @apply h-4 w-4 shrink-0 transition-transform duration-base ease-out-expo;
   }
-
-  .btn:active {
-    transform: scale(1);
-  }
-
-  .btn-primary {
-    @apply text-white;
-    background-color: theme('colors.blue.solid');
-    box-shadow:
-      inset 0 0.5px rgb(255 255 255 / 0.35),
-      inset 0 -1px 2px 0 rgb(0 0 0 / 0.45);
-  }
-
-  .btn-primary::after {
-    background-color: theme('colors.blue.solid-hover');
-    background-image:
-      radial-gradient(at 51% 89%, rgb(61 155 255 / 0.9) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgb(8 120 249 / 0.9) 0px, transparent 50%),
-      radial-gradient(at 22% 91%, rgb(8 120 249 / 0.85) 0px, transparent 50%);
-  }
-
-  .btn-outline {
-    @apply text-white;
-    background-color: rgb(255 255 255 / 0.04);
-  }
-
-  .btn-outline::after {
-    background-color: rgb(255 255 255 / 0.12);
-  }
-
-  /* El icono del botón avanza un par de píxeles al pasar por encima. */
-  .btn .btn-icon {
-    @apply transition-transform duration-base ease-out-expo;
-  }
-
   .btn:hover .btn-icon {
     transform: translateX(3px);
   }
 
-  /* ------------------------------------------------------------------ *
-   * Enlaces con subrayado animado
-   * ------------------------------------------------------------------ */
-
-  .link-underline {
-    @apply relative inline-flex items-center;
+  /* Principal: placa de acero cepillado con texto tinta. */
+  .btn-chrome {
+    @apply text-ink;
+    background: linear-gradient(180deg, #ffffff 0%, #dde1e8 48%, #b9c0cc 52%, #eef0f4 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      inset 0 -1px 0 rgb(0 0 0 / 0.25),
+      0 10px 30px -12px rgb(122 166 255 / 0.45);
+  }
+  .btn-chrome:hover {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.9),
+      inset 0 -1px 0 rgb(0 0 0 / 0.25),
+      0 14px 40px -10px rgb(122 166 255 / 0.6);
   }
 
-  .link-underline::after {
+  .btn-ghost {
+    @apply border border-line-strong bg-white/[0.03] text-chrome backdrop-blur-sm hover:border-chrome-2/60 hover:bg-white/[0.06];
+  }
+
+  .btn-whatsapp {
+    @apply bg-whatsapp text-white hover:bg-whatsapp-hover;
+  }
+
+  /* ---------- Superficies ---------- */
+  /* Tarjeta con canto biselado: un filete de luz en el borde superior, como
+     el canto pulido de una pieza de metal. */
+  .panel {
+    @apply relative rounded-2xl border border-line bg-ink-3/80;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+  }
+  .panel::before {
     content: '';
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 1px;
-    width: 100%;
-    background-color: currentColor;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform theme('transitionDuration.base')
-      theme('transitionTimingFunction.out-expo');
+    @apply pointer-events-none absolute inset-x-6 top-0 h-px;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.28), transparent);
   }
 
-  .link-underline:hover::after,
-  .link-underline:focus-visible::after {
-    transform: scaleX(1);
-    transform-origin: left;
+  .panel-hover {
+    @apply transition-[transform,border-color,background-color,box-shadow] duration-base ease-out-expo;
+  }
+  @media (hover: hover) {
+    .panel-hover:hover {
+      @apply -translate-y-1 border-line-strong bg-ink-4/80;
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.07),
+        0 30px 60px -30px rgb(0 0 0 / 0.9),
+        0 0 0 1px rgb(122 166 255 / 0.08);
+    }
   }
 
-  /* ------------------------------------------------------------------ *
-   * Rejilla técnica de fondo. Reemplaza los siete <svg> con <pattern>
-   * repetidos por el sitio: mismo dibujo, cero nodos en el DOM.
-   * ------------------------------------------------------------------ */
-
-  .tech-grid {
+  /* Cuadrícula técnica que se desvanece hacia los bordes. */
+  .grid-lines {
     @apply pointer-events-none absolute inset-0;
     background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-    background-size: 56px 56px;
-    /* La rejilla se desvanece hacia los bordes: sin esto parece papel
-       milimetrado y compite con el contenido. */
-    mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black 20%, transparent 78%);
-    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black 20%, transparent 78%);
+      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
   }
 
-  /* Separador entre secciones: filete que nace en el acento rojo. */
-  .rule-accent {
-    @apply h-px w-full;
+  .number-index {
+    @apply font-mono text-xs font-medium tracking-[0.16em] text-signal-text;
+  }
+
+  .link-u {
+    @apply bg-no-repeat transition-[background-size,color] duration-base ease-out-expo;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-size: 0% 1px;
+  }
+  .link-u:hover {
+    background-size: 100% 1px;
+  }
+
+  .status-dot {
+    @apply relative inline-block h-2 w-2 shrink-0 rounded-full bg-signal;
+  }
+  .status-dot::after {
+    content: '';
+    @apply absolute inset-0 animate-pulse-ring rounded-full bg-signal;
+  }
+
+  /* ---------- Formularios ---------- */
+  .field {
+    @apply block min-h-12 w-full rounded-xl border bg-ink-4/70 px-4 py-3 text-base text-chrome placeholder:text-chrome-muted/80;
+    @apply transition-[border-color,background-color,box-shadow] duration-base ease-out-expo;
+    @apply hover:border-chrome-dim focus:border-volt-text focus:bg-ink-4 focus:outline-none focus:ring-4 focus:ring-volt/15;
+  }
+  select.field {
+    @apply cursor-pointer appearance-none pr-11;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238A93A3' stroke-width='1.6'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+  .field-label {
+    @apply mb-2 block font-mono text-eyebrow uppercase text-chrome-muted;
+  }
+
+  /* ---------- Emblema ---------- */
+  /* Brillo especular que recorre la S. La máscara es la propia imagen del
+     emblema, así el reflejo solo se pinta sobre el metal. */
+  .emblem-shine {
+    @apply pointer-events-none absolute inset-0;
+    -webkit-mask: url('/images/brand/servitek-emblema.webp') center / contain no-repeat;
+    mask: url('/images/brand/servitek-emblema.webp') center / contain no-repeat;
+  }
+  .emblem-shine::after {
+    content: '';
+    @apply absolute -inset-y-1/4 -left-full w-2/3 rotate-12;
     background: linear-gradient(
       90deg,
-      theme('colors.accent.deep / 55%') 0%,
-      theme('colors.blue.DEFAULT / 30%') 18%,
-      transparent 60%
+      transparent,
+      rgb(255 255 255 / 0) 20%,
+      rgb(255 255 255 / 0.55) 50%,
+      transparent 80%
     );
+    mix-blend-mode: overlay;
+    animation: shine 7s cubic-bezier(0.65, 0, 0.35, 1) 1.6s infinite;
   }
 
-  /* ------------------------------------------------------------------ *
-   * Campos de formulario
-   * ------------------------------------------------------------------ */
+  /* Banda que se desplaza sin fin; los bordes se funden con el fondo. */
+  .marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+}
 
-  .field {
-    @apply w-full rounded-md border bg-white/[0.04] px-4 py-3 text-white placeholder-white/40;
-    @apply transition-[border-color,background-color,box-shadow] duration-fast ease-out;
-    @apply focus:border-blue-text focus:bg-white/[0.07] focus:outline-none;
-    @apply focus:ring-2 focus:ring-blue-text/45;
+@layer utilities {
+  /* Contornos de texto para las tipografías gigantes de fondo. */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(255 255 255 / 0.13);
+  }
+}
+
+/* Fondo ambiental de todo el sitio: dos halos con los colores del emblema y
+   grano fino. Es CSS estático en una capa fija: no consume CPU al hacer
+   scroll, a diferencia del lienzo WebGL que había antes. */
+.ambient {
+  @apply pointer-events-none fixed inset-0 -z-10;
+  background:
+    radial-gradient(60rem 40rem at 0% -10%, rgb(229 32 46 / 0.1), transparent 60%),
+    radial-gradient(60rem 45rem at 100% 110%, rgb(42 107 255 / 0.12), transparent 60%),
+    theme('colors.ink.DEFAULT');
+}
+.ambient::after {
+  content: '';
+  @apply absolute inset-0 opacity-[0.05] mix-blend-overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes sheen {
+  from {
+    left: -50%;
+  }
+  to {
+    left: 120%;
+  }
+}
+
+@keyframes shine {
+  0%,
+  55% {
+    transform: translateX(0) rotate(12deg);
+  }
+  100% {
+    transform: translateX(320%) rotate(12deg);
+  }
+}
+
+@keyframes conductor {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
+/* El S-trazo del hero se dibuja una vez al cargar. */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

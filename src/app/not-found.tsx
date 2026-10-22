@@ -10,30 +10,23 @@ import { navigation } from '@/data/navigation';
  */
 export default function NotFound() {
   return (
-    <div className="relative flex min-h-[70vh] items-center overflow-hidden bg-navy py-24">
-      <div className="tech-grid" aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-accent-deep/50 via-blue/25 to-transparent"
-      />
+    <div className="relative flex min-h-[70vh] items-center overflow-hidden py-24">
+      <div className="grid-lines" aria-hidden="true" />
 
-      <div className="container-custom relative z-10">
+      <div className="container-site relative">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
-            <span className="inline-flex animate-fade-up items-center gap-3">
-              <span className="status-dot animate-accent-blink" aria-hidden="true" />
-              <span className="eyebrow">ERROR 404</span>
-            </span>
+            <span className="eyebrow animate-rise">Error 404</span>
 
             <h1
-              className="mt-6 animate-fade-up text-balance text-display text-white"
+              className="mt-6 animate-rise text-display font-semibold"
               style={{ animationDelay: '80ms' }}
             >
               Esta ruta no existe
             </h1>
 
             <p
-              className="mt-6 max-w-lg animate-fade-up text-lg leading-relaxed text-white/65"
+              className="mt-6 max-w-lg animate-rise text-lead text-chrome-2"
               style={{ animationDelay: '180ms' }}
             >
               La página que buscaba no está disponible o ha cambiado de dirección. Desde aquí puede
@@ -41,40 +34,37 @@ export default function NotFound() {
             </p>
 
             <div
-              className="mt-10 flex animate-fade-up flex-col gap-4 sm:flex-row"
+              className="mt-10 flex animate-rise flex-col gap-4 sm:flex-row"
               style={{ animationDelay: '280ms' }}
             >
-              <Link href="/" className="btn btn-primary px-7 py-4 text-sm tracking-[0.06em]">
+              <Link href="/" className="btn btn-chrome">
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                VOLVER AL INICIO
+                Volver al inicio
               </Link>
-              <Link
-                href="/contacto"
-                className="btn btn-outline px-7 py-4 text-sm tracking-[0.06em]"
-              >
-                CONTACTAR
-                <ArrowRight className="btn-icon h-4 w-4" aria-hidden="true" />
+              <Link href="/contacto" className="btn btn-ghost">
+                Contactar
+                <ArrowRight className="btn-icon" aria-hidden="true" />
               </Link>
             </div>
           </div>
 
           {/* Índice de secciones, numerado como el menú móvil. */}
           <nav
-            className="animate-fade-up lg:col-span-5"
+            className="animate-rise lg:col-span-5"
             style={{ animationDelay: '380ms' }}
             aria-label="Secciones del sitio"
           >
-            <p className="eyebrow text-white/55">IR A UNA SECCIÓN</p>
+            <p className="eyebrow">Ir a una sección</p>
             <ul className="mt-5 border-t border-line">
               {navigation.map((item, index) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="group flex items-center gap-4 border-b border-line py-4 text-white/70 transition-colors duration-fast hover:text-white"
+                    className="group flex items-center gap-4 border-b border-line py-4 text-chrome-2 transition-colors duration-fast hover:text-chrome"
                   >
                     <span
                       aria-hidden="true"
-                      className="index-number text-white/30 transition-colors duration-base group-hover:text-accent"
+                      className="number-index text-chrome-dim transition-colors duration-base group-hover:text-signal-text"
                     >
                       {String(index + 1).padStart(2, '0')}
                     </span>

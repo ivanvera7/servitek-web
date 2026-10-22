@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Archivo, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import { generateOrganizationSchema, generateLocalBusinessSchema } from '@/lib/schema';
 import { SITE_URL, IS_INDEXABLE } from '@/lib/site';
 import { Providers } from '@/components/layout/Providers';
@@ -7,14 +7,25 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import '@/styles/globals.css';
 
-const inter = Inter({
+// Archivo con eje de anchura: los titulares van expandidos, como las
+// letras del logotipo.
+const display = Archivo({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  axes: ['wdth'],
+  variable: '--font-display',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const sans = IBM_Plex_Sans({
   subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
+  variable: '--font-sans',
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
   display: 'swap',
   variable: '--font-mono',
 });
@@ -66,7 +77,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'SERVITEK - Electromecánica industrial en Paraguay',
+        alt: 'SERVITEK E.A.S. — Electromecánica industrial en Paraguay',
       },
     ],
   },
@@ -91,18 +102,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const organizationSchema = generateOrganizationSchema();
   const localBusinessSchema = generateLocalBusinessSchema();
 
   return (
-    <html lang="es" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="es" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <head>
-        <meta name="theme-color" content="#061321" />
+        <meta name="theme-color" content="#07090D" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -116,10 +123,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen font-sans">
+      <body className="min-h-screen">
+        <div className="ambient" aria-hidden="true" />
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-blue-solid focus:px-5 focus:py-3 focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-chrome focus:px-5 focus:py-3 focus:font-medium focus:text-ink"
         >
           Saltar al contenido
         </a>

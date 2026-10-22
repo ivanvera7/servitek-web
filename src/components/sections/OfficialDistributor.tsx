@@ -1,91 +1,88 @@
 import Image from 'next/image';
-import { ExternalLink, FileText } from 'lucide-react';
+import { ArrowUpRight, FileText } from 'lucide-react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { distributors } from '@/data/distributors';
 
 /**
- * Distribuidor oficial.
- *
- * Sellos de certificación (IP66/IP67/IP69K) en vez de cifras propias: es la
- * prueba de confianza que SERVITEK puede respaldar hoy, tomada tal cual del
- * catálogo del fabricante, sin inventar métricas comerciales.
+ * Distribuidor oficial. Las certificaciones salen tal cual del catálogo del
+ * fabricante: es la prueba de confianza que SERVITEK puede respaldar hoy.
  */
 export function OfficialDistributor() {
   return (
-    <section className="section-padding relative overflow-hidden bg-navy/92">
-      <div className="tech-grid opacity-60" aria-hidden="true" />
-
-      <div className="container-custom relative z-10">
+    <section className="section">
+      <div className="container-site">
         <ScrollReveal>
           <SectionHeading
-            eyebrow="DISTRIBUIDOR OFICIAL"
+            eyebrow="Distribuidor oficial"
             title="Respaldados por fabricantes líderes del sector"
             description="Somos distribuidores oficiales de marcas reconocidas en iluminación industrial, lo que garantiza productos certificados y soporte técnico directo del fabricante."
-            className="mb-14 md:mb-16"
           />
         </ScrollReveal>
 
-        <div className="mx-auto max-w-4xl space-y-6">
-          {distributors.map((brand, index) => (
-            <ScrollReveal key={brand.name} delay={index * 90} fullHeight>
-              <article className="card-dark relative overflow-hidden p-8 md:p-12">
-                <div className="tech-frame" aria-hidden="true" />
-
-                <div className="relative flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+        <div className="mt-16 space-y-6">
+          {distributors.map((brand) => (
+            <ScrollReveal key={brand.name}>
+              <article className="panel grid overflow-hidden lg:grid-cols-12">
+                <div className="p-8 sm:p-12 lg:col-span-7">
                   <Image
                     src={brand.logo}
                     alt={`Logotipo de ${brand.name}`}
                     width={brand.logoWidth}
                     height={brand.logoHeight}
-                    className="h-9 w-auto md:h-10"
+                    className="h-9 w-auto md:h-11"
                   />
-
-                  <div className="flex flex-wrap gap-2">
-                    {brand.certifications.map((cert) => (
-                      <span
-                        key={cert}
-                        className="rounded-full border border-line-strong px-3 py-1 font-mono text-xs uppercase tracking-wide text-white/70"
+                  <p className="mt-10 max-w-xl text-lead text-chrome-2">{brand.description}</p>
+                  <ul className="mt-8 flex flex-wrap gap-2">
+                    {brand.categories.map((category) => (
+                      <li
+                        key={category}
+                        className="rounded-full border border-line px-3.5 py-1.5 text-sm text-chrome-muted"
                       >
-                        {cert}
-                      </span>
+                        {category}
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
 
-                <p className="relative mt-8 max-w-2xl text-base leading-relaxed text-white/70">
-                  {brand.description}
-                </p>
+                <div className="relative flex flex-col justify-between gap-10 border-t border-line bg-ink-2/60 p-8 sm:p-12 lg:col-span-5 lg:border-l lg:border-t-0">
+                  <div className="grid-lines" aria-hidden="true" />
+                  <div className="relative">
+                    <p className="font-mono text-eyebrow uppercase text-chrome-muted">
+                      Grado de protección
+                    </p>
+                    <ul className="mt-6 grid grid-cols-3 gap-3">
+                      {brand.certifications.map((cert) => (
+                        <li
+                          key={cert}
+                          className="rounded-xl border border-line-strong bg-ink-3 py-5 text-center font-display text-xl font-bold text-chrome [font-stretch:125%]"
+                        >
+                          {cert}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                <ul className="relative mt-6 flex flex-wrap gap-x-6 gap-y-3">
-                  {brand.categories.map((category) => (
-                    <li key={category} className="flex items-center gap-2 text-sm text-white/65">
-                      <span className="h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
-                      {category}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="relative mt-10 flex flex-col items-start gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-                  <a
-                    href={brand.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="link-underline inline-flex items-center gap-2 text-sm font-medium text-white/70 transition-colors duration-base hover:text-blue-text"
-                  >
-                    <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                    {brand.website.replace('https://', '')}
-                  </a>
-
-                  <a
-                    href={brand.catalogUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary px-6 py-3 text-sm tracking-[0.06em]"
-                  >
-                    <FileText className="btn-icon h-4 w-4" aria-hidden="true" />
-                    VER CATÁLOGO
-                  </a>
+                  <div className="relative flex flex-col gap-3 sm:flex-row lg:flex-col">
+                    <a
+                      href={brand.catalogUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-chrome"
+                    >
+                      <FileText className="h-4 w-4" aria-hidden="true" />
+                      Ver catálogo
+                    </a>
+                    <a
+                      href={brand.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-ghost"
+                    >
+                      {brand.website.replace('https://', '')}
+                      <ArrowUpRight className="btn-icon" aria-hidden="true" />
+                    </a>
+                  </div>
                 </div>
               </article>
             </ScrollReveal>
