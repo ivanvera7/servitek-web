@@ -112,7 +112,7 @@ servitek-web/
 
 ### Colores y tipografía
 
-La fuente de verdad es `tailwind.config.ts` y la sección "Sistema de diseño"
+La fuente de verdad es `tailwind.config.ts` y la sección "Identidad visual y sistema de diseño"
 del README. Resumen: fondo `ink` (#07090D), texto `chrome` en tres niveles,
 rojo `signal` y azul `volt` tomados del emblema. Titulares en Archivo
 expandida, texto en IBM Plex Sans y rótulos en IBM Plex Mono.

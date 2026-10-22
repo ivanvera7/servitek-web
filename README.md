@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src=".github/assets/banner.png" alt="SERVITEK — Electromecánica industrial" width="720">
+<img src=".github/assets/banner.png" alt="SERVITEK E.A.S. — Electromecánica industrial · Paraguay" width="720">
 
 # Sitio web corporativo de SERVITEK
 
@@ -26,8 +26,13 @@ en `out/` que el CDN sirve tal cual.
 > Parte del contenido es provisional y está marcado en el código con
 > `PENDIENTE (empresa)`. Ver [Contenido pendiente](#contenido-pendiente).
 
+<p align="center">
+  <img src=".github/assets/preview-portada.jpg" alt="Portada del sitio: titular cromado y emblema S montado como instrumento" width="900">
+</p>
+
 ## Índice
 
+- [Vista previa](#vista-previa)
 - [Estado del proyecto](#estado-del-proyecto)
 - [Stack](#stack)
 - [Puesta en marcha](#puesta-en-marcha)
@@ -35,7 +40,7 @@ en `out/` que el CDN sirve tal cual.
 - [Estructura](#estructura)
 - [Rutas](#rutas)
 - [Editar el contenido](#editar-el-contenido)
-- [Sistema de diseño](#sistema-de-diseño)
+- [Identidad visual y sistema de diseño](#identidad-visual-y-sistema-de-diseño)
 - [Variables de entorno](#variables-de-entorno)
 - [Calidad y pruebas](#calidad-y-pruebas)
 - [Despliegue en Cloudflare Pages](#despliegue-en-cloudflare-pages)
@@ -44,6 +49,20 @@ en `out/` que el CDN sirve tal cual.
 - [Decisiones de arquitectura](#decisiones-de-arquitectura)
 - [Limitaciones conocidas](#limitaciones-conocidas)
 
+## Vista previa
+
+Fichas de servicio y de sector, con banner fotográfico bajo el titular:
+
+<p align="center">
+  <img src=".github/assets/preview-paginas.jpg" alt="Fichas de Auditoría y Automatización de Tableros y de Infraestructura Comercial, Sanatorios y Data Centers" width="900">
+</p>
+
+En móvil: portada, ficha de sector y menú a pantalla completa:
+
+<p align="center">
+  <img src=".github/assets/preview-movil.jpg" alt="Tres pantallas móviles: portada, ficha de sector y menú" width="680">
+</p>
+
 ## Estado del proyecto
 
 | Área | Estado | Nota |
@@ -51,7 +70,7 @@ en `out/` que el CDN sirve tal cual.
 | Build estático | ✅ | 23 páginas HTML, sin errores ni avisos |
 | TypeScript | ✅ | Modo `strict`, sin ningún `any` |
 | ESLint | ✅ | Sin avisos |
-| Pruebas | ✅ | 25 pruebas sobre datos, rutas y SEO |
+| Pruebas | ✅ | 26 pruebas sobre datos, recursos de marca, rutas y SEO |
 | Contraste WCAG 2.1 AA | ✅ | 0 combinaciones por debajo del mínimo |
 | Responsive 320–1920 px | ✅ | Sin desbordamiento horizontal |
 | Navegación por teclado | ✅ | Foco atrapado en el menú, sin paradas fuera de pantalla |
@@ -61,8 +80,10 @@ en `out/` que el CDN sirve tal cual.
 | Textos legales | 🟡 | Sin redactar; las páginas van con `noindex` |
 | Dominio propio | ⬜ | Sin contratar |
 
-**Peso de la portada:** 109 kB de JavaScript inicial más 178 kB de imagen del
-hero. `public/` completo ocupa 1,1 MB.
+**Peso de la portada:** 117 kB de JavaScript inicial. Sobre la línea de
+pliegue solo cargan el logotipo (54 kB) y el emblema (109 kB); el resto de
+fotos (≈540 kB en total) se cargan en diferido al hacer scroll. `public/`
+completo ocupa 3,5 MB, de los que 0,9 MB son el catálogo PDF de Conexled.
 
 ## Stack
 
@@ -71,6 +92,7 @@ hero. `public/` completo ocupa 1,1 MB.
 | **Framework** | [Next.js 14](https://nextjs.org/) — App Router, `output: 'export'` |
 | **Lenguaje** | [TypeScript](https://www.typescriptlang.org/) en modo `strict` |
 | **Estilos** | [Tailwind CSS](https://tailwindcss.com/) con tokens propios |
+| **Tipografía** | Archivo, IBM Plex Sans e IBM Plex Mono vía `next/font` (autoalojadas) |
 | **Iconos** | [Lucide](https://lucide.dev/) |
 | **Formularios** | [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) |
 | **SEO** | [next-sitemap](https://github.com/iamvishnusankar/next-sitemap) + JSON-LD Schema.org |
@@ -120,11 +142,13 @@ Antes de subir cambios, `npm run check`.
 ├── public/
 │   ├── _headers                Cabeceras de seguridad y caché (Cloudflare)
 │   ├── images/                 Assets servidos tal cual (sin optimización on-demand)
+│   │   ├── brand/              Logotipo y emblema "S" (generados de los SVG de marca)
+│   │   ├── brands/             Logotipos de fabricantes representados
 │   │   ├── equipo/             Fotos del equipo — ver LEEME.txt
-│   │   ├── hero/               Imagen principal
-│   │   ├── logo/               Logotipos
-│   │   ├── services/           Una imagen por unidad de negocio (fondo de tarjeta y cabecera)
-│   │   └── projects/           Una imagen de portada por proyecto (fondo de tarjeta y cabecera)
+│   │   ├── hero/               Fotografía de planta de la portada (2 tamaños)
+│   │   ├── services/           Foto por unidad de negocio (1600 px + versión -card)
+│   │   ├── sectors/            Foto por sector (1600 px + versión -card)
+│   │   └── projects/           Marcador por proyecto (sustituir por fotos reales)
 │   └── favicon.ico, og-image.jpg, site.webmanifest
 ├── src/
 │   ├── app/                    Rutas (App Router). Un directorio por página
@@ -259,11 +283,34 @@ ilustrativas de Wikimedia Commons con licencia CC: sus créditos están en
 `src/data/image-credits.ts` y se publican en Términos y Condiciones.
 </details>
 
-## Sistema de diseño
+## Identidad visual y sistema de diseño
 
-"Cromo y corriente": sale del emblema de la marca, una S de metal pulido con
-la mitad superior roja, el trazo central cromado y la mitad inferior azul,
-sobre negro.
+<p align="center">
+  <img src=".github/assets/paleta.png" alt="Paleta: ink, ink-3, chrome, chrome-muted, signal y volt; botón cromado y tipografías" width="900">
+</p>
+
+**"Cromo y corriente".** Todo sale del emblema de la marca: una S de metal
+pulido con la mitad superior roja, el trazo central cromado y la mitad
+inferior azul, sobre negro. El sitio es oscuro de punta a punta para que el
+logotipo plateado luzca como en su arte original, y repite sus materiales:
+
+- **Cromo** en los titulares (`.text-metal`, el mismo horizonte de luz que
+  las letras del logo) y en el botón principal de acero cepillado.
+- **Rojo y azul** del emblema como acentos: índices, filetes y halos, nunca
+  como fondos grandes.
+- **Firma tricolor** rojo → plata → azul (`.rule-tricolor`) en el pie, la
+  barra de progreso de lectura y el filete de la imagen para compartir.
+
+**Movimiento.** En la portada, el emblema está montado como un instrumento:
+anillo graduado, rótulo circular que gira despacio y arcos rojo/azul que se
+dibujan al cargar. Un brillo especular recorre la S cada pocos segundos y,
+con ratón, la pieza se inclina siguiendo el puntero. Las fotos se abren como
+un obturador, los titulares entran escalonados y una banda continua repasa
+los sellos de la empresa. Todo se desactiva con `prefers-reduced-motion`.
+
+**Fotografía.** Cada servicio y cada sector tiene una foto 16:9 propia. Son
+ilustrativas (Wikimedia Commons, licencias CC con crédito en Términos y
+Condiciones) hasta contar con fotos de obras reales de SERVITEK.
 
 Los colores viven **solo** en `tailwind.config.ts`. No se escribe ningún color
 a mano en los componentes.
@@ -483,9 +530,13 @@ rellenos con texto blanco (`volt-solid`, 5,8:1).
   estático**: corresponden a Image Optimizer, Server Actions, middleware y SSR,
   que este sitio no ejecuta. Es riesgo del entorno de build, no de producción.
   Pendiente de planificar como tarea propia.
-- **Sin variantes de imagen por ancho.** Con `images.unoptimized` no se genera
-  `srcset`. El hero se sirve a 1600 px también en móvil. Aceptable con el peso
-  actual (178 kB), mejorable con `<picture>` y variantes generadas a mano.
+- **Variantes de imagen hechas a mano.** Con `images.unoptimized` no se genera
+  `srcset`. Por eso cada foto existe en dos tamaños (1600 px y `-card` de
+  800 px) y la foto de planta de la portada usa `<picture>` con una versión
+  de 960 px para móvil. Los banners de las fichas cargan 1600 px también en
+  móvil (≤ 270 kB).
+- **Logotipo raster.** Los SVG de la marca solo envuelven un PNG; si llega un
+  vectorial real, sustituir los archivos de `public/images/brand/`.
 - **Core Web Vitals sin medir.** Las cifras de peso están medidas; LCP, INP y CLS
   reales solo pueden comprobarse sobre el despliegue en Cloudflare.
 - **Probado en Chromium.** Falta verificación en Safari y Firefox reales.

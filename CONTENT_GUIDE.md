@@ -359,7 +359,7 @@ declara `Brand.tsx`).
 ## 9. Colores y tipografía
 
 La paleta, la tipografía y las piezas reutilizables están documentadas en el
-README, sección "Sistema de diseño". Los colores viven solo en
+README, sección "Identidad visual y sistema de diseño". Los colores viven solo en
 `tailwind.config.ts`; las fuentes se cargan en `src/app/layout.tsx` con
 `next/font` (Archivo, IBM Plex Sans, IBM Plex Mono).
 
