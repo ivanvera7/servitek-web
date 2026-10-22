@@ -252,6 +252,11 @@ foto con el mismo nombre o cambiar `image` en `projects.ts`.
 
 La fotografía de planta de la portada vive en `public/images/hero/` en dos
 tamaños (`planta-industrial.webp` y `-960.webp` para móvil).
+
+Servicios y sectores llevan foto propia en `public/images/services/` y
+`public/images/sectors/` (1600 px y versión `-card` de 800 px). Son fotos
+ilustrativas de Wikimedia Commons con licencia CC: sus créditos están en
+`src/data/image-credits.ts` y se publican en Términos y Condiciones.
 </details>
 
 ## Sistema de diseño

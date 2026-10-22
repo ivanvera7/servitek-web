@@ -57,6 +57,7 @@ export default function ServicePage({ params }: ServicePageProps) {
         eyebrow={`Unidad ${String(index + 1).padStart(2, '0')}`}
         title={service.shortTitle}
         subtitle={service.description}
+        image={service.image}
         breadcrumbs={[
           { label: 'Servicios', href: '/servicios' },
           { label: service.shortTitle, href: `/servicios/${service.slug}` },

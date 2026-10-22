@@ -110,6 +110,7 @@ const config: Config = {
         rise: 'rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both',
         'fade-in': 'fadeIn 1000ms cubic-bezier(0.16, 1, 0.3, 1) both',
         'emblem-in': 'emblemIn 1400ms cubic-bezier(0.16, 1, 0.3, 1) both',
+        unveil: 'unveil 1400ms cubic-bezier(0.16, 1, 0.3, 1) both',
         float: 'float 7s ease-in-out infinite',
         'spin-slow': 'spin 80s linear infinite',
         'spin-slower': 'spin 140s linear infinite reverse',
@@ -127,6 +128,11 @@ const config: Config = {
         emblemIn: {
           from: { opacity: '0', transform: 'scale(0.86) rotate(-6deg)', filter: 'blur(12px)' },
           to: { opacity: '1', transform: 'none', filter: 'blur(0)' },
+        },
+        // Foto que se abre como un obturador.
+        unveil: {
+          from: { opacity: '0', clipPath: 'inset(8% 6% round 24px)', transform: 'scale(1.04)' },
+          to: { opacity: '1', clipPath: 'inset(0% 0% round 24px)', transform: 'none' },
         },
         float: {
           '0%, 100%': { transform: 'translate3d(0, -6px, 0)' },

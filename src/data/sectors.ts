@@ -34,6 +34,7 @@ export const sectors: Sector[] = [
       "Auditoría y modernización de tableros de potencia",
       "Respaldo energético para campaña de zafra"
     ],
+    image: "/images/sectors/agroindustria.webp",
     cta: "Ver soluciones"
   },
   {
@@ -55,6 +56,7 @@ export const sectors: Sector[] = [
       "Tableros y canalizaciones aptas para ambientes húmedos y corrosivos",
       "Corrección del factor de potencia"
     ],
+    image: "/images/sectors/frigorificos.webp",
     cta: "Ver soluciones"
   },
   {
@@ -75,6 +77,7 @@ export const sectors: Sector[] = [
       "Mantenimiento de motores, bombas y reductores",
       "Alineación láser y balanceo dinámico"
     ],
+    image: "/images/sectors/maquilas.webp",
     cta: "Ver soluciones"
   },
   {
@@ -95,6 +98,7 @@ export const sectors: Sector[] = [
       "Respaldo energético redundante y transferencia automática",
       "Iluminación de emergencia y señalización"
     ],
+    image: "/images/sectors/edificios.webp",
     cta: "Ver soluciones"
   },
   {
@@ -117,6 +121,7 @@ export const sectors: Sector[] = [
       "Tableros para ambientes corrosivos y húmedos",
       "Respaldo energético y transferencia automática"
     ],
+    image: "/images/sectors/alcoholeras.webp",
     cta: "Ver soluciones"
   }
 ];

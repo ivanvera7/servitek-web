@@ -12,7 +12,8 @@ export const navigation: NavigationItem[] = [
 
 export const footerNavigation: NavigationItem[] = [
   { label: "Política de Privacidad", href: "/politica-de-privacidad" },
-  { label: "Términos y Condiciones", href: "/terminos-y-condiciones" }
+  { label: "Términos y Condiciones", href: "/terminos-y-condiciones" },
+  { label: "Créditos fotográficos", href: "/terminos-y-condiciones#creditos" }
 ];
 
 export const ctaNavigation: NavigationItem = {

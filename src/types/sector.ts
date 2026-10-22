@@ -8,5 +8,7 @@ export interface Sector {
   fullDescription?: string;
   problems: string[];
   solutions: string[];
+  /** Fotografía 16:9 (1600 px). La versión de tarjeta lleva el sufijo -card. */
+  image: string;
   cta: string;
 }

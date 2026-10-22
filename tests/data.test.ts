@@ -7,6 +7,7 @@ import { projects } from '@/data/projects';
 import { navigation, footerNavigation } from '@/data/navigation';
 import { company } from '@/data/company';
 import { serviceOptions } from '@/data/contact';
+import { cardImage } from '@/lib/utils';
 
 const PUBLIC = path.resolve(__dirname, '../public');
 const slugify = (s: string) => s.toLowerCase();
@@ -17,8 +18,11 @@ const slugify = (s: string) => s.toLowerCase();
  * datos de contacto incoherentes entre sí.
  */
 describe('rutas de imagen', () => {
+  const fotos = [...services, ...sectors].map((s) => s.image);
   const rutas = [
-    ...services.map((s) => s.image),
+    ...fotos,
+    // Cada foto tiene su versión de tarjeta (ver cardImage en lib/utils).
+    ...fotos.map(cardImage),
     ...projects.flatMap((p) => p.images),
   ].filter(Boolean);
 

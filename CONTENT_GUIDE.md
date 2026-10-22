@@ -295,11 +295,28 @@ export const whatsappMessageTemplate = (data: FormData) => {
 /public/images/
 ├── brand/       # Logotipo y emblema de SERVITEK
 ├── hero/        # Fotografía de planta de la portada (2 tamaños)
-├── services/    # Imágenes por servicio (referenciadas en services.ts)
+├── services/    # Foto de cada servicio (campo `image` en services.ts)
+├── sectors/     # Foto de cada sector (campo `image` en sectors.ts)
 ├── projects/    # Marcadores de proyecto (sustituir por fotos reales)
 ├── brands/      # Logotipos de fabricantes representados
 └── equipo/      # Foto del fundador (ver LEEME.txt)
 ```
+
+### Fotos de servicios y sectores
+
+Cada servicio y cada sector tiene una foto en dos tamaños, ambos WebP 16:9:
+
+- `nombre.webp` — 1600 × 900, < 250 kB. Banner de la ficha de detalle.
+- `nombre-card.webp` — 800 × 450, < 80 kB. Tarjetas y panel de la portada.
+
+La ruta del campo `image` apunta a la grande; la de tarjeta se deduce sola
+(`cardImage` en `src/lib/utils.ts`). Una prueba comprueba que existan las dos.
+
+Las fotos actuales son ilustrativas, de Wikimedia Commons con licencia
+Creative Commons, y exigen crédito: están listadas en
+`src/data/image-credits.ts` y se muestran en Términos y Condiciones
+(«Créditos fotográficos»). Al sustituir una por una foto propia de
+SERVITEK, borrar su entrada de ese archivo.
 
 ### Cambiar la fotografía de la portada
 

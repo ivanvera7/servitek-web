@@ -42,6 +42,7 @@ export default function SectorPage({ params }: SectorPageProps) {
         eyebrow={`Sector ${String(index + 1).padStart(2, '0')}`}
         title={sector.shortTitle}
         subtitle={sector.description}
+        image={sector.image}
         breadcrumbs={[
           { label: 'Sectores', href: '/sectores' },
           { label: sector.shortTitle, href: `/sectores/${sector.slug}` },

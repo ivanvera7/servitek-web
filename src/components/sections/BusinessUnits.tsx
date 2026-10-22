@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { services } from '@/data/services';
@@ -8,7 +9,7 @@ import { ServiceIcon } from '@/lib/icons';
 import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { cn } from '@/lib/utils';
+import { cardImage, cn } from '@/lib/utils';
 
 /**
  * Índice de las cinco unidades. Cada fila es un enlace normal; en escritorio,
@@ -104,7 +105,24 @@ export function BusinessUnits() {
             aria-label="Resumen de la unidad seleccionada"
           >
             <div className="panel sticky top-28 overflow-hidden p-10">
-              <div className="grid-lines opacity-60" aria-hidden="true" />
+              {/* Las cinco fotos van apiladas y se funden entre sí: así no
+                  hay espera de carga al cambiar de unidad. */}
+              <div className="relative -mx-10 -mt-10 mb-10 aspect-[16/9] overflow-hidden rounded-t-2xl bg-ink-4">
+                {services.map((service, index) => (
+                  <Image
+                    key={service.id}
+                    src={cardImage(service.image)}
+                    alt=""
+                    fill
+                    sizes="40vw"
+                    className={cn(
+                      'object-cover transition-[opacity,transform] duration-slow ease-out-expo',
+                      index === active ? 'scale-100 opacity-100' : 'scale-105 opacity-0'
+                    )}
+                  />
+                ))}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-3 via-ink-3/20 to-transparent" />
+              </div>
               <div key={current.id} className="relative animate-rise">
                 <div className="flex items-center justify-between">
                   <span className="number-index">UNIDAD {String(active + 1).padStart(2, '0')}</span>

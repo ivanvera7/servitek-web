@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { company } from '@/data/company';
+import { imageCredits } from '@/data/image-credits';
 import { PageHero } from '@/components/ui/PageHero';
 import { generatePageMetadata } from '@/lib/seo';
 
@@ -58,6 +59,40 @@ export default function TerminosYCondiciones() {
               Los logotipos, marcas y contenidos de este sitio pertenecen a {company.legalName} o a
               sus respectivos titulares, y no pueden reproducirse sin autorización previa.
             </p>
+
+            <h2 id="creditos" className="mt-14 scroll-mt-28 text-h3 font-semibold">
+              Créditos fotográficos
+            </h2>
+            <p className="mt-4 leading-relaxed text-chrome-2">
+              Las fotografías de servicios y sectores son ilustrativas y proceden de Wikimedia
+              Commons. Se han recortado y ajustado de color; cada una conserva su licencia original.
+            </p>
+            <ul className="mt-6 border-t border-line text-sm">
+              {imageCredits.map((c) => (
+                <li
+                  key={c.file}
+                  className="border-b border-line py-4 leading-relaxed text-chrome-muted"
+                >
+                  <a
+                    href={c.source}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-u text-chrome-2 hover:text-chrome"
+                  >
+                    {c.title}
+                  </a>{' '}
+                  · {c.author} ·{' '}
+                  <a
+                    href={c.licenseUrl}
+                    target="_blank"
+                    rel="noopener noreferrer license"
+                    className="link-u font-mono hover:text-chrome"
+                  >
+                    {c.license}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
             <div className="panel mt-16 p-7">
               <p className="eyebrow mb-4">EN REVISIÓN</p>
