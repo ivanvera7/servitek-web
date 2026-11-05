@@ -6,6 +6,8 @@
 
 **SERVITEK E.A.S.** — Electromecánica industrial y servicios eléctricos de alta exigencia en Paraguay.
 
+**Versión 1.0.0** · ver [`CHANGELOG.md`](CHANGELOG.md)
+
 [![CI](https://github.com/ivanvera7/servitek-web/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanvera7/servitek-web/actions/workflows/ci.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -70,7 +72,7 @@ En móvil: portada, ficha de sector y menú a pantalla completa:
 | Build estático | ✅ | 23 páginas HTML, sin errores ni avisos |
 | TypeScript | ✅ | Modo `strict`, sin ningún `any` |
 | ESLint | ✅ | Sin avisos |
-| Pruebas | ✅ | 26 pruebas sobre datos, recursos de marca, rutas y SEO |
+| Pruebas | ✅ | 28 pruebas sobre datos, recursos de marca, clientes, rutas y SEO |
 | Contraste WCAG 2.1 AA | ✅ | 0 combinaciones por debajo del mínimo |
 | Responsive 320–1920 px | ✅ | Sin desbordamiento horizontal |
 | Navegación por teclado | ✅ | Foco atrapado en el menú, sin paradas fuera de pantalla |
@@ -144,6 +146,7 @@ Antes de subir cambios, `npm run check`.
 │   ├── images/                 Assets servidos tal cual (sin optimización on-demand)
 │   │   ├── brand/              Logotipo y emblema "S" (generados de los SVG de marca)
 │   │   ├── brands/             Logotipos de fabricantes representados
+│   │   ├── clients/            Logotipos de clientes (sección «Clientes»)
 │   │   ├── equipo/             Fotos del equipo — ver LEEME.txt
 │   │   ├── hero/               Fotografía de planta de la portada (2 tamaños)
 │   │   ├── services/           Foto por unidad de negocio (1600 px + versión -card)
@@ -211,6 +214,7 @@ Todo el texto vive en `src/data/`. **No hace falta tocar los componentes.**
 | Unidades de negocio | `src/data/services.ts` |
 | Sectores industriales | `src/data/sectors.ts` |
 | Proyectos | `src/data/projects.ts` |
+| Clientes y sus logotipos | `src/data/clients.ts` |
 | Menú y enlaces del pie | `src/data/navigation.ts` |
 | Opciones del formulario | `src/data/contact.ts` |
 
@@ -470,6 +474,7 @@ grep -rn "PENDIENTE (empresa)" src/
 | Email corporativo propio (hoy hay un Gmail) | `src/data/company.ts` | Sí |
 | Foto y biografía del fundador | `company-content.ts` | No |
 | Proyectos reales con autorización del cliente | `src/data/projects.ts` | No |
+| Logotipos oficiales de Copavic, Piroy y Elevare, y permiso de cada cliente para mostrar su marca | `src/data/clients.ts` | No |
 | Cifras verificables (años, proyectos, equipo) | `company-content.ts` | No |
 | Sector cárnicas: el texto original llegó cortado | `src/data/sectors.ts` | No |
 | Confirmar si el sector *Alcoholeras* se mantiene | `src/data/sectors.ts` | No |

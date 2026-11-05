@@ -287,6 +287,31 @@ export const whatsappMessageTemplate = (data: FormData) => {
 
 ---
 
+## 6b. Clientes
+
+La sección «Clientes» (portada y Nosotros) se alimenta de `src/data/clients.ts`.
+
+### Agregar un cliente
+
+```ts
+{ name: 'Empresa S.A.' },  // sin logo: se muestra el nombre como marca tipográfica
+```
+
+### Agregar o cambiar un logotipo
+
+1. Copiar el archivo (SVG preferido, o PNG de al menos 400 px de ancho) en
+   `public/images/clients/`.
+2. Completar `logo`, `logoWidth` y `logoHeight` (tamaño original del archivo).
+3. Ajustar `logoClass` (por ejemplo `'h-10 md:h-11'`) si el logo se ve
+   demasiado grande o pequeño junto a los demás.
+
+Los logotipos se muestran en blanco monocromo, sea cual sea su color original:
+así la pared de clientes se lee como una sola pieza sobre el fondo oscuro.
+
+Antes de publicar, confirmar con cada cliente que autoriza mostrar su marca.
+
+---
+
 ## 7. Imágenes
 
 ### Estructura de carpetas

@@ -8,6 +8,7 @@ import { navigation, footerNavigation } from '@/data/navigation';
 import { company } from '@/data/company';
 import { serviceOptions } from '@/data/contact';
 import { cardImage } from '@/lib/utils';
+import { clients } from '@/data/clients';
 
 const PUBLIC = path.resolve(__dirname, '../public');
 const slugify = (s: string) => s.toLowerCase();
@@ -144,5 +145,19 @@ describe('navegación', () => {
   it('no hay destinos repetidos', () => {
     const hrefs = navigation.map((n) => n.href);
     expect(new Set(hrefs).size).toBe(hrefs.length);
+  });
+});
+
+describe('clientes', () => {
+  it('los logotipos existen en public/ y declaran su tamaño', () => {
+    for (const c of clients.filter((c) => c.logo)) {
+      expect(existsSync(path.join(PUBLIC, c.logo!)), c.name).toBe(true);
+      expect(c.logoWidth && c.logoHeight, c.name).toBeTruthy();
+    }
+  });
+
+  it('no hay clientes repetidos', () => {
+    const nombres = clients.map((c) => c.name);
+    expect(new Set(nombres).size).toBe(nombres.length);
   });
 });

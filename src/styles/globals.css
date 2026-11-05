@@ -63,8 +63,9 @@
     @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-10;
   }
 
+  /* Ritmo vertical amplio, de escaparate: cada sección respira sola. */
   .section {
-    @apply relative py-24 md:py-32;
+    @apply relative py-28 md:py-40;
   }
 
   /* Rótulo técnico: mono versal con una marca roja delante. */
@@ -74,6 +75,11 @@
   .eyebrow::before {
     content: '';
     @apply h-px w-6 shrink-0 bg-signal;
+  }
+  /* Centrado: filete a ambos lados, rojo a la izquierda y azul a la derecha. */
+  .eyebrow-center::after {
+    content: '';
+    @apply h-px w-6 shrink-0 bg-volt;
   }
 
   /* Texto cromado: la misma línea de horizonte que las letras del logotipo,
@@ -177,7 +183,7 @@
   /* Tarjeta con canto biselado: un filete de luz en el borde superior, como
      el canto pulido de una pieza de metal. */
   .panel {
-    @apply relative rounded-2xl border border-line bg-ink-3/80;
+    @apply relative rounded-3xl border border-line bg-ink-3/80;
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
   }
   .panel::before {
@@ -196,6 +202,34 @@
         inset 0 1px 0 rgb(255 255 255 / 0.07),
         0 30px 60px -30px rgb(0 0 0 / 0.9),
         0 0 0 1px rgb(122 166 255 / 0.08);
+    }
+  }
+
+  /* Placa de cliente: vidrio oscuro con canto de luz y un halo tricolor que
+     aparece desde abajo al pasar el cursor. */
+  .client-tile {
+    @apply relative flex h-full min-h-[10rem] flex-col gap-4 overflow-hidden rounded-3xl border border-line bg-ink-3/60 px-4 pb-5 pt-8 md:min-h-[12rem];
+    @apply transition-[border-color,background-color,transform] duration-base ease-out-expo;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+  }
+  .client-tile::before {
+    content: '';
+    @apply pointer-events-none absolute inset-x-8 top-0 h-px;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.28), transparent);
+  }
+  .client-tile::after {
+    content: '';
+    @apply pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-slow ease-out-expo;
+    background:
+      radial-gradient(70% 60% at 25% 120%, rgb(229 32 46 / 0.16), transparent 70%),
+      radial-gradient(70% 60% at 75% 120%, rgb(42 107 255 / 0.2), transparent 70%);
+  }
+  @media (hover: hover) {
+    .client-tile:hover {
+      @apply -translate-y-0.5 border-line-strong bg-ink-4/70;
+    }
+    .client-tile:hover::after {
+      opacity: 1;
     }
   }
 

@@ -31,7 +31,7 @@ export function Hero() {
           </p>
 
           <h1
-            className="mt-8 animate-rise text-[clamp(1.875rem,0.9rem+4vw,4.25rem)] font-semibold leading-[0.98] [font-stretch:115%]"
+            className="mt-8 animate-rise text-[clamp(2.125rem,0.9rem+4.6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.025em] [font-stretch:115%]"
             style={{ animationDelay: STEP.headline }}
           >
             <span className="text-metal">Electromecánica industrial</span>{' '}

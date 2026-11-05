@@ -92,7 +92,7 @@ export function Navbar() {
         className={cn(
           'fixed inset-x-0 top-0 z-[70] transition-[background-color,border-color,backdrop-filter] duration-slow ease-out-expo',
           isScrolled && !open
-            ? 'border-b border-line bg-ink/75 backdrop-blur-xl backdrop-saturate-150'
+            ? 'border-b border-line bg-ink/70 backdrop-blur-2xl backdrop-saturate-[1.8]'
             : 'border-b border-transparent bg-transparent'
         )}
       >

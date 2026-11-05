@@ -7,6 +7,7 @@ import { company } from '@/data/company';
 import { aboutContent } from '@/data/company-content';
 import { FounderCard } from '@/components/about/FounderCard';
 import { WhyServitek } from '@/components/sections/WhyServitek';
+import { Clients } from '@/components/sections/Clients';
 import { CTASection } from '@/components/sections/CTASection';
 import { generatePageMetadata } from '@/lib/seo';
 
@@ -103,7 +104,8 @@ export default function NosotrosPage() {
 
       <WhyServitek eyebrow="Pilares" />
 
-      <div className="pt-24 md:pt-32" />
+      <Clients />
+
       <CTASection />
     </>
   );

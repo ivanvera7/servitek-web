@@ -52,7 +52,7 @@ export function PageHero({
         )}
 
         <h1
-          className="mt-6 max-w-4xl animate-rise text-h1 font-semibold"
+          className="mt-6 max-w-5xl animate-rise text-display font-semibold"
           style={{ animationDelay: '120ms' }}
         >
           {title}

@@ -1,5 +1,6 @@
 import { Hero } from '@/components/hero/Hero';
 import { TrustBar } from '@/components/sections/TrustBar';
+import { Clients } from '@/components/sections/Clients';
 import { ValueProposition } from '@/components/sections/ValueProposition';
 import { BusinessUnits } from '@/components/sections/BusinessUnits';
 import { WhyServitek } from '@/components/sections/WhyServitek';
@@ -14,6 +15,7 @@ export default function Home() {
     <>
       <Hero />
       <TrustBar />
+      <Clients />
       <ValueProposition />
       <BusinessUnits />
       <WhyServitek />
