@@ -7,6 +7,7 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ServiceCard } from '@/components/services/ServiceCard';
+import { GlassGrid } from '@/components/ui/GlassCard';
 import { CTASection } from '@/components/sections/CTASection';
 import { generatePageMetadata } from '@/lib/seo';
 
@@ -91,13 +92,13 @@ export default function SectorPage({ params }: SectorPageProps) {
           <ScrollReveal>
             <h2 className="text-h2 font-semibold">Servicios relacionados</h2>
           </ScrollReveal>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {relatedServices.map((service) => (
-              <ScrollReveal key={service.id} delay={services.indexOf(service) * 90} fullHeight>
+          <GlassGrid className="mt-10">
+            {relatedServices.map((service, i) => (
+              <ScrollReveal key={service.id} delay={i * 70} fullHeight>
                 <ServiceCard service={service} />
               </ScrollReveal>
             ))}
-          </div>
+          </GlassGrid>
         </div>
       </section>
 

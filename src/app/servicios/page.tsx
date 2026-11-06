@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { PageHero } from '@/components/ui/PageHero';
+import { GlassCard, GlassGrid } from '@/components/ui/GlassCard';
 import { ServiceCard } from '@/components/services/ServiceCard';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -7,7 +8,6 @@ import { CTASection } from '@/components/sections/CTASection';
 import { services } from '@/data/services';
 import { servicesIntro, workProcess } from '@/data/company-content';
 import { generatePageMetadata } from '@/lib/seo';
-import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'Servicios',
@@ -31,19 +31,21 @@ export default function ServiciosPage() {
             <SectionHeading title={servicesIntro.title} description={servicesIntro.body} />
           </ScrollReveal>
 
-          <div className="mt-16 grid gap-5 md:grid-cols-2">
-            {services.map((service, index) => (
-              <ScrollReveal
-                key={service.id}
-                delay={(index % 2) * 90}
-                fullHeight
-                // Cinco en dos columnas: el último ocupa la fila entera.
-                className={cn(index === services.length - 1 && 'md:col-span-2')}
-              >
+          <GlassGrid className="mt-16">
+            {services.map((service, i) => (
+              <ScrollReveal key={service.id} delay={i * 70} fullHeight>
                 <ServiceCard service={service} />
               </ScrollReveal>
             ))}
-          </div>
+            <ScrollReveal delay={services.length * 70} fullHeight>
+              <GlassCard
+                href="/contacto"
+                title="¿Necesita otra solución?"
+                description="Cuéntenos qué necesita su planta y le proponemos el servicio adecuado."
+                cta="Solicitar presupuesto"
+              />
+            </ScrollReveal>
+          </GlassGrid>
         </div>
       </section>
 

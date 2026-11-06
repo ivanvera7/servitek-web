@@ -196,9 +196,9 @@ expandida, texto en IBM Plex Sans y rótulos en IBM Plex Mono.
 | `Hero` | Titular, contactos directos y emblema montado como instrumento (`EmblemStage`) |
 | `TrustBar` | Banda continua con sellos y unidades de negocio |
 | `ValueProposition` | Propuesta de valor |
-| `BusinessUnits` | Índice interactivo de las 5 unidades de negocio |
+| `BusinessUnits` | Las 5 unidades de negocio en rejilla de vidrio 3 × 2 (`GlassGrid`) |
 | `WhyServitek` | Sección "Por qué SERVITEK" |
-| `SectorsPreview` | Preview de sectores |
+| `SectorsPreview` | Los 5 sectores en rejilla de vidrio 3 × 2 (`GlassGrid`) |
 | `CTASection` | Call-to-action final |
 
 ### UI
@@ -210,6 +210,7 @@ expandida, texto en IBM Plex Sans y rótulos en IBM Plex Mono.
 | `StatCard` | Tarjeta de estadística |
 | `Badge` | Etiqueta/badge |
 | `PageHero` | Hero para páginas internas |
+| `GlassCard` / `GlassGrid` | Tarjeta de foto completa con placa de vidrio líquido y rejilla simétrica 3 × 2; base de `ServiceCard` y `SectorCard` |
 
 ### Services
 
@@ -275,8 +276,8 @@ Todos los estilos se escriben para móvil primero y se escalan con breakpoints:
 |------------|--------|--------|---------|
 | Navbar | Hamburguesa | Hamburguesa | Horizontal |
 | Hero | stacked | stacked | side by side |
-| ServiceCards | 1 columna | 2 columnas | 2-4 columnas |
-| SectorCards | 1 columna | 2 columnas | 3-4 columnas |
+| ServiceCards | 1 columna | 2 columnas | 3 columnas |
+| SectorCards | 1 columna | 2 columnas | 3 columnas |
 | Footer | stacked | 2 columnas | 4 columnas |
 
 ---

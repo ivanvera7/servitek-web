@@ -2,6 +2,22 @@
 
 Todos los cambios relevantes del sitio web de SERVITEK.
 
+## [1.0.2] - 2026-11-06
+
+### Cambiado
+- Servicios y sectores con una presentación nueva y simétrica: rejilla de
+  3 × 2 (2 × 3 en tableta, una columna en móvil) con tarjetas de foto completa
+  y una placa de vidrio líquido abajo (icono, título, descripción y enlace).
+  La sexta tarjeta cierra la rejilla: en la portada lleva al catálogo
+  completo y en /servicios y /sectores a pedir presupuesto.
+- Animaciones: entrada escalonada de 70 ms, zoom suave de la foto, la placa
+  sube 4 px y un foco de luz sigue al cursor (solo con ratón; con movimiento
+  reducido no hay desplazamientos). Con transparencia reducida o sin
+  `backdrop-filter`, la placa pasa a ser opaca.
+- Componente compartido `GlassCard` / `GlassGrid` (components/ui/GlassCard);
+  `ServiceCard` y `SectorCard` lo envuelven. La portada deja el índice con
+  panel lateral de las unidades de negocio.
+
 ## [1.0.1] - 2026-11-06
 
 ### Corregido

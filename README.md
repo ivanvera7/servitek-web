@@ -6,7 +6,7 @@
 
 **SERVITEK E.A.S.** — Electromecánica industrial y servicios eléctricos de alta exigencia en Paraguay.
 
-**Versión 1.0.1** · ver [`CHANGELOG.md`](CHANGELOG.md)
+**Versión 1.0.2** · ver [`CHANGELOG.md`](CHANGELOG.md)
 
 [![CI](https://github.com/ivanvera7/servitek-web/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanvera7/servitek-web/actions/workflows/ci.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
