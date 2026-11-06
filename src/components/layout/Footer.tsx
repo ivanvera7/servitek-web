@@ -4,6 +4,7 @@ import { services } from '@/data/services';
 import { company } from '@/data/company';
 import { businessHours } from '@/data/company-content';
 import { Logo } from '@/components/ui/Brand';
+import { CurrentYear } from '@/components/ui/CurrentYear';
 
 function Column({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -19,8 +20,6 @@ function Column({ title, children }: { title: string; children: React.ReactNode 
 const linkClass = 'link-u py-1 text-chrome-2 transition-colors duration-fast hover:text-chrome';
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="relative overflow-hidden border-t border-line bg-ink-2/80">
       <div className="rule-tricolor absolute inset-x-0 top-0 opacity-60" aria-hidden="true" />
@@ -99,7 +98,8 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col gap-4 border-t border-line pt-8 font-mono text-xs uppercase tracking-[0.12em] text-chrome-muted md:flex-row md:items-center md:justify-between">
           <p>
-            © {year} {company.legalName} · RUC {company.ruc}
+            © <CurrentYear buildYear={new Date().getFullYear()} />{' '}
+            <span translate="no">{company.legalName}</span> · RUC {company.ruc}
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {footerNavigation.map((item) => (

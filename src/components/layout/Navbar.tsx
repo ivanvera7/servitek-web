@@ -197,7 +197,7 @@ export function Navbar() {
       >
         <div className="grid-lines" aria-hidden="true" />
         <nav
-          className="container-site relative flex-1 overflow-y-auto pt-24"
+          className="container-site relative flex-1 overflow-y-auto overscroll-contain pt-24"
           aria-label="Navegación móvil"
         >
           <ul>

@@ -111,7 +111,7 @@ export function ContactForm() {
             type="text"
             id="name"
             autoComplete="name"
-            placeholder="Su nombre"
+            placeholder="Ej.: Juan Pérez…"
             {...register('name')}
             {...fieldProps('name')}
           />
@@ -131,7 +131,7 @@ export function ContactForm() {
             type="text"
             id="company"
             autoComplete="organization"
-            placeholder="Nombre de la empresa"
+            placeholder="Ej.: Industrias del Sur…"
             {...register('company')}
             {...fieldProps('company')}
           />
@@ -215,7 +215,7 @@ export function ContactForm() {
           <textarea
             id="message"
             rows={4}
-            placeholder="Describa su necesidad técnica..."
+            placeholder="Describa su necesidad técnica…"
             {...register('message')}
             {...fieldProps('message')}
           />
@@ -275,7 +275,7 @@ export function ContactForm() {
                 aria-hidden="true"
                 className="h-4 w-4 animate-spin rounded-full border-2 border-ink/30 border-t-ink"
               />
-              Enviando
+              Enviando…
             </>
           ) : (
             <>

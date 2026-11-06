@@ -77,7 +77,7 @@ export function SocialLinks() {
               y el icono al aparecer. */}
           <span
             aria-hidden="true"
-            className={`pointer-events-none absolute bottom-full left-0 z-10 mb-3 translate-y-1 whitespace-nowrap rounded-md border border-line bg-ink-4 px-3 py-1.5 font-mono text-xs text-white opacity-0 transition-[opacity,transform,background-color,border-color] duration-base ease-out-expo group-hover:translate-y-0 group-hover:opacity-100 ${accent}`}
+            className={`pointer-events-none absolute bottom-full left-0 z-10 mb-3 translate-y-1 whitespace-nowrap rounded-md border border-line bg-ink-4 px-3 py-1.5 font-mono text-xs text-white opacity-0 transition-[opacity,transform,background-color,border-color] duration-base ease-out-expo group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 ${accent}`}
           >
             {label}
             {/* Punta del globo, alineada con el centro del icono (48 px). */}

@@ -11,6 +11,19 @@
        convertir <html> en contenedor de scroll, que rompería `sticky`. */
     overflow-x: clip;
     color-scheme: dark;
+    /* El estado activo lo dan los propios botones (escala y foco). */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Sin espera de doble toque para zoom en controles. */
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  label,
+  summary {
+    touch-action: manipulation;
   }
 
   body {

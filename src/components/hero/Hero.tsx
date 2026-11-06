@@ -27,7 +27,7 @@ export function Hero() {
             style={{ animationDelay: STEP.status }}
           >
             <span className="status-dot" aria-hidden="true" />
-            {company.legalName} · {company.contact.address}
+            <span translate="no">{company.legalName}</span> · {company.contact.address}
           </p>
 
           <h1

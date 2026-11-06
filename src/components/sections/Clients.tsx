@@ -43,20 +43,26 @@ export function Clients({ className }: { className?: string }) {
                         height={client.logoHeight}
                         className={cn(
                           'w-auto max-w-full object-contain transition-opacity duration-base ease-out-expo group-hover:opacity-100',
-                          client.logoTone === 'color' ? 'opacity-90' : 'opacity-70 brightness-0 invert',
+                          client.logoTone === 'color'
+                            ? 'opacity-90'
+                            : 'opacity-70 brightness-0 invert',
                           client.logoClass
                         )}
                       />
                     ) : (
                       <span
                         aria-hidden="true"
+                        translate="no"
                         className="font-display text-[clamp(1.25rem,0.9rem+1.4vw,1.875rem)] font-bold uppercase leading-none tracking-[0.04em] text-chrome/70 transition-colors duration-base ease-out-expo [font-stretch:125%] group-hover:text-chrome"
                       >
                         {brandName(client.name)}
                       </span>
                     )}
                   </div>
-                  <p className="relative text-center font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-chrome-muted">
+                  <p
+                    translate="no"
+                    className="relative text-center font-mono text-[0.6875rem] uppercase tracking-[0.16em] text-chrome-muted"
+                  >
                     {client.name}
                   </p>
                 </div>
