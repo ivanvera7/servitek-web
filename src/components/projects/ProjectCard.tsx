@@ -6,17 +6,16 @@ import { Project } from '@/types/project';
 interface ProjectCardProps {
   project: Project;
   /** Posición en la lista: alimenta la numeración 01, 02, 03... */
-  index?: number;
 }
 
-export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       href={`/proyectos/${project.id}`}
       className="panel panel-hover group flex h-full flex-col overflow-hidden"
     >
       {/* Marcador gráfico hasta tener la fotografía real (src/data/projects.ts). */}
-      <div className="relative h-56 overflow-hidden rounded-t-2xl bg-ink-4">
+      <div className="relative h-56 overflow-hidden rounded-t-3xl bg-ink-4">
         <Image
           src={project.image}
           alt=""
@@ -25,9 +24,6 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
           className="object-cover transition-transform duration-slow ease-out-expo group-hover:scale-[1.05]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-3 to-transparent" />
-        <span className="number-index absolute left-6 top-6">
-          {String(index + 1).padStart(2, '0')}
-        </span>
         <span className="absolute bottom-5 left-6 font-mono text-eyebrow uppercase text-chrome-2">
           {project.sector}
         </span>

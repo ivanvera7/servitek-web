@@ -65,9 +65,6 @@ export function BusinessUnits() {
                           isActive ? 'scale-y-100' : 'scale-y-0'
                         )}
                       />
-                      <span className="number-index relative mt-2 w-7 shrink-0">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
                       <span className="relative min-w-0 flex-1">
                         <span
                           className={cn(
@@ -106,7 +103,7 @@ export function BusinessUnits() {
             <div className="panel sticky top-28 overflow-hidden p-10">
               {/* Las cinco fotos van apiladas y se funden entre sí: así no
                   hay espera de carga al cambiar de unidad. */}
-              <div className="relative -mx-10 -mt-10 mb-10 aspect-[16/9] overflow-hidden rounded-t-2xl bg-ink-4">
+              <div className="relative -mx-10 -mt-10 mb-10 aspect-[16/9] overflow-hidden rounded-t-3xl bg-ink-4">
                 {services.map((service, index) => (
                   <Image
                     key={service.id}
@@ -123,8 +120,7 @@ export function BusinessUnits() {
                 <div className="absolute inset-0 bg-gradient-to-t from-ink-3 via-ink-3/20 to-transparent" />
               </div>
               <div key={current.id} className="relative animate-rise">
-                <div className="flex items-center justify-between">
-                  <span className="number-index">UNIDAD {String(active + 1).padStart(2, '0')}</span>
+                <div className="flex items-center justify-end">
                   <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-line-strong bg-ink-4 text-volt-text">
                     <ServiceIcon name={current.icon} className="h-6 w-6" />
                   </span>

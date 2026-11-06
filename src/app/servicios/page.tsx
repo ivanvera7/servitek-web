@@ -28,11 +28,7 @@ export default function ServiciosPage() {
       <section className="section pt-8 md:pt-12">
         <div className="container-site">
           <ScrollReveal>
-            <SectionHeading
-              eyebrow={servicesIntro.eyebrow}
-              title={servicesIntro.title}
-              description={servicesIntro.body}
-            />
+            <SectionHeading title={servicesIntro.title} description={servicesIntro.body} />
           </ScrollReveal>
 
           <div className="mt-16 grid gap-5 md:grid-cols-2">
@@ -44,7 +40,7 @@ export default function ServiciosPage() {
                 // Cinco en dos columnas: el último ocupa la fila entera.
                 className={cn(index === services.length - 1 && 'md:col-span-2')}
               >
-                <ServiceCard service={service} index={index} />
+                <ServiceCard service={service} />
               </ScrollReveal>
             ))}
           </div>

@@ -54,7 +54,7 @@ export default function NotFound() {
             style={{ animationDelay: '380ms' }}
             aria-label="Secciones del sitio"
           >
-            <p className="eyebrow">Ir a una sección</p>
+            <p className="text-sm text-chrome-muted">Ir a una sección</p>
             <ul className="mt-5 border-t border-line">
               {navigation.map((item, index) => (
                 <li key={item.href}>

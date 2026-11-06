@@ -17,14 +17,11 @@ export function ValueProposition() {
           </ScrollReveal>
           <ScrollReveal delay={100}>
             <h2 className="mt-8 font-semibold">
-              {lines.map((line, i) => (
+              {lines.map((line) => (
                 <span
                   key={line}
                   className="flex items-baseline gap-5 border-b border-line py-5 text-[clamp(1.5rem,1rem+2.2vw,2.75rem)] leading-tight"
                 >
-                  <span aria-hidden="true" className="number-index w-6 shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                   <span className="text-metal">{line}</span>
                 </span>
               ))}

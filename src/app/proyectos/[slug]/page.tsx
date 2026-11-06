@@ -43,7 +43,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   return (
     <>
       <PageHero
-        eyebrow="Proyecto"
         title={project.title}
         subtitle={`${project.sector}, ${project.location}`}
         breadcrumbs={[
@@ -126,7 +125,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               <div className="mt-10 grid gap-5 md:grid-cols-3">
                 {others.map((p) => (
                   <ScrollReveal key={p.id} delay={projects.indexOf(p) * 80} fullHeight>
-                    <ProjectCard project={p} index={projects.indexOf(p)} />
+                    <ProjectCard project={p} />
                   </ScrollReveal>
                 ))}
               </div>

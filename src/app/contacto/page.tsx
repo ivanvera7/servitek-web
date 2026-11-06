@@ -26,8 +26,7 @@ export default function ContactoPage() {
         <div className="container-site grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <ScrollReveal>
-              <span className="eyebrow">Formulario</span>
-              <h2 className="mt-6 text-h2 font-semibold">Solicitar presupuesto</h2>
+              <h2 className="text-h2 font-semibold">Solicitar presupuesto</h2>
               <p className="mt-5 max-w-xl leading-relaxed text-chrome-2">
                 Complete los datos y se abrirá WhatsApp con su consulta ya redactada. Los campos
                 marcados con asterisco son obligatorios.

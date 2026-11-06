@@ -6,7 +6,6 @@
  * empresa prefiere el tuteo, hay que cambiarlo en toda la web, no solo aquí.
  */
 export const servicesIntro = {
-  eyebrow: "ENFOQUE TÉCNICO",
   title: "Electromecánica integral para la continuidad de su industria",
   body: "En SERVITEK transformamos y protegemos la infraestructura operativa de su planta. Nos especializamos en el diseño, montaje, automatización y mantenimiento de sistemas industriales, garantizando la máxima eficiencia y evitando paradas imprevistas. Conectamos tecnología avanzada y mano de obra calificada para mantener su producción en movimiento."
 };
@@ -31,7 +30,7 @@ export const founder = {
 };
 
 export const aboutContent = {
-  title: "SERVITEK: electromecánica para operaciones que exigen confiabilidad",
+  title: "Electromecánica para operaciones exigentes",
   subtitle: "SERVITEK E.A.S. es una empresa paraguaya especializada en electromecánica industrial y servicios eléctricos de alta exigencia.",
 
   /**

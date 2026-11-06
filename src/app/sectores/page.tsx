@@ -34,7 +34,7 @@ export default function SectoresPage() {
                 fullHeight
                 className={cn(index === sectors.length - 1 && 'md:col-span-2')}
               >
-                <SectorCard sector={sector} index={index} />
+                <SectorCard sector={sector} />
               </ScrollReveal>
             ))}
           </div>

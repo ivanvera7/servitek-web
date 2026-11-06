@@ -46,8 +46,7 @@ export function FounderCard() {
       </div>
 
       <div>
-        <span className="eyebrow">Fundador</span>
-        <h3 className="mt-6 text-h2 font-semibold">{founder.name}</h3>
+        <h3 className="text-h2 font-semibold">{founder.name}</h3>
         <p className="mt-2 font-mono text-sm uppercase tracking-[0.14em] text-chrome-muted">
           {founder.role}
         </p>

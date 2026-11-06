@@ -65,7 +65,6 @@ export default function PoliticaDePrivacidad() {
             </p>
 
             <div className="panel mt-16 p-7">
-              <p className="eyebrow mb-4">EN REVISIÓN</p>
               <p className="text-sm leading-relaxed text-chrome-2">
                 Documento en revisión. La versión definitiva, redactada conforme a la normativa
                 paraguaya aplicable en materia de protección de datos personales, se publicará antes

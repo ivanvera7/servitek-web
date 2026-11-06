@@ -54,7 +54,6 @@ export default function ServicePage({ params }: ServicePageProps) {
       />
 
       <PageHero
-        eyebrow={`Unidad ${String(index + 1).padStart(2, '0')}`}
         title={service.shortTitle}
         subtitle={service.description}
         image={service.image}
@@ -82,19 +81,16 @@ export default function ServicePage({ params }: ServicePageProps) {
                 <h3 className="mt-16 font-mono text-eyebrow font-normal uppercase text-chrome-muted [font-stretch:100%]">
                   Problemas que resolvemos
                 </h3>
-                <ol className="mt-6 border-t border-line">
-                  {service.problemsSolved.map((problem, i) => (
+                <ul className="mt-6 border-t border-line">
+                  {service.problemsSolved.map((problem) => (
                     <li
                       key={problem}
                       className="flex gap-5 border-b border-line py-5 text-chrome-2"
                     >
-                      <span className="number-index mt-1 w-6 shrink-0">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
                       {problem}
                     </li>
                   ))}
-                </ol>
+                </ul>
               </ScrollReveal>
             )}
 
@@ -148,16 +144,13 @@ export default function ServicePage({ params }: ServicePageProps) {
                 <ScrollReveal delay={200}>
                   <div className="panel bg-ink-2/80 p-8 sm:p-10">
                     <h3 className="text-xl font-semibold">Alcance técnico</h3>
-                    <ol className="mt-7 space-y-3">
-                      {service.technicalScope.map((item, i) => (
-                        <li key={item} className="flex gap-4 text-[0.9375rem] text-chrome-muted">
-                          <span className="font-mono text-xs text-chrome-dim">
-                            {String(i + 1).padStart(2, '0')}
-                          </span>
+                    <ul className="mt-7 space-y-3">
+                      {service.technicalScope.map((item) => (
+                        <li key={item} className="text-[0.9375rem] text-chrome-muted">
                           {item}
                         </li>
                       ))}
-                    </ol>
+                    </ul>
                   </div>
                 </ScrollReveal>
               )}
@@ -167,7 +160,7 @@ export default function ServicePage({ params }: ServicePageProps) {
 
         {/* Navegación entre unidades. */}
         <nav aria-label="Otras unidades de negocio" className="container-site mt-24">
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+          <div className="grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2">
             <Link
               href={`/servicios/${prev.slug}`}
               className="group flex flex-col gap-3 bg-ink-2 p-7 transition-colors duration-base hover:bg-ink-3"

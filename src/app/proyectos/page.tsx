@@ -37,7 +37,7 @@ export default function ProyectosPage() {
           <div className="grid gap-5 md:grid-cols-2">
             {projects.map((project, index) => (
               <ScrollReveal key={project.id} delay={index * 90} fullHeight>
-                <ProjectCard project={project} index={index} />
+                <ProjectCard project={project} />
               </ScrollReveal>
             ))}
           </div>

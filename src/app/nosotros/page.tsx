@@ -48,8 +48,7 @@ export default function NosotrosPage() {
               fullHeight
             >
               <article className="panel h-full p-8 sm:p-12">
-                <span className="number-index">{String(i + 1).padStart(2, '0')}</span>
-                <h2 className="mt-6 text-h2 font-semibold">{block.label}</h2>
+                <h2 className="text-h2 font-semibold">{block.label}</h2>
                 <p className="mt-6 text-lead text-chrome-2">{block.text}</p>
               </article>
             </ScrollReveal>
@@ -60,7 +59,7 @@ export default function NosotrosPage() {
       <section className="section border-y border-line bg-ink-2/60">
         <div className="container-site">
           <ScrollReveal>
-            <SectionHeading eyebrow="Quién lidera SERVITEK" title="Dirección" />
+            <SectionHeading title="Dirección" />
           </ScrollReveal>
           <ScrollReveal delay={150}>
             <div className="mt-16">
@@ -85,13 +84,10 @@ export default function NosotrosPage() {
               <li key={value.title}>
                 <ScrollReveal delay={index * 70}>
                   <div className="group grid gap-3 border-b border-line py-8 md:grid-cols-12 md:gap-8">
-                    <span className="number-index md:col-span-1 md:mt-2">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
                     <h3 className="text-h3 font-semibold transition-colors duration-base md:col-span-5">
                       {value.title}
                     </h3>
-                    <p className="leading-relaxed text-chrome-muted md:col-span-6 md:mt-1">
+                    <p className="leading-relaxed text-chrome-muted md:col-span-7 md:mt-1">
                       {value.description}
                     </p>
                   </div>
@@ -102,7 +98,7 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      <WhyServitek eyebrow="Pilares" />
+      <WhyServitek />
 
       <Clients />
 

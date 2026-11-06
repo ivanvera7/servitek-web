@@ -33,13 +33,11 @@ export default function SectorPage({ params }: SectorPageProps) {
   const sector = sectors.find((s) => s.slug === params.slug);
   if (!sector) notFound();
 
-  const index = sectors.findIndex((s) => s.id === sector.id);
   const relatedServices = services.slice(0, 3);
 
   return (
     <>
       <PageHero
-        eyebrow={`Sector ${String(index + 1).padStart(2, '0')}`}
         title={sector.shortTitle}
         subtitle={sector.description}
         image={sector.image}
@@ -54,19 +52,16 @@ export default function SectorPage({ params }: SectorPageProps) {
           <div className="lg:col-span-7">
             <ScrollReveal>
               <h2 className="text-h2 font-semibold">Problemas comunes en este sector</h2>
-              <ol className="mt-10 border-t border-line">
-                {sector.problems.map((problem, i) => (
+              <ul className="mt-10 border-t border-line">
+                {sector.problems.map((problem) => (
                   <li
                     key={problem}
                     className="flex gap-5 border-b border-line py-6 text-lead text-chrome-2"
                   >
-                    <span className="number-index mt-1.5 w-6 shrink-0">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
                     {problem}
                   </li>
                 ))}
-              </ol>
+              </ul>
               <div className="mt-12">
                 <Button href="/contacto" size="lg">
                   Solicitar evaluación
@@ -99,7 +94,7 @@ export default function SectorPage({ params }: SectorPageProps) {
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {relatedServices.map((service) => (
               <ScrollReveal key={service.id} delay={services.indexOf(service) * 90} fullHeight>
-                <ServiceCard service={service} index={services.indexOf(service)} />
+                <ServiceCard service={service} />
               </ScrollReveal>
             ))}
           </div>

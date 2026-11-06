@@ -32,8 +32,7 @@ export function ContactInfo() {
     <div className="panel overflow-hidden p-8 sm:p-10 lg:sticky lg:top-28">
       <div className="rule-tricolor absolute inset-x-0 top-0" aria-hidden="true" />
 
-      <span className="eyebrow">Datos directos</span>
-      <h2 className="mt-6 text-h3 font-semibold">Información de contacto</h2>
+      <h2 className="text-h3 font-semibold">Información de contacto</h2>
 
       <ul className="mt-10">
         <InfoRow icon={Phone} label="Teléfono">

@@ -18,6 +18,14 @@ Todos los cambios relevantes del sitio web de SERVITEK.
   «Electromecánica para plantas que no paran.» (3 líneas en escritorio) y los
   mensajes de error del formulario aparecen con una transición breve.
 - Sin rayas largas en textos visibles ni en etiquetas accesibles.
+- El mismo pulido en todas las páginas (Servicios, Sectores, Nosotros,
+  Contacto, Proyectos, legales y 404): rótulos superiores limitados a uno de
+  cada tres encabezados, sin rótulos numerados en las fichas de detalle (las
+  migas ya dan contexto), sin pastillas «Unidad 01» / «Sector 01» sobre las
+  fotos y sin índices 01, 02… en listas sin orden.
+- Titular de Nosotros acortado a «Electromecánica para operaciones
+  exigentes» (2 líneas en escritorio, antes 4).
+- Radios unificados: tarjetas a 24 px, iconos a 16 px.
 
 ## [1.0.0] — 2026-11-05
 

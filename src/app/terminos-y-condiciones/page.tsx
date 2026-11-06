@@ -95,7 +95,6 @@ export default function TerminosYCondiciones() {
             </ul>
 
             <div className="panel mt-16 p-7">
-              <p className="eyebrow mb-4">EN REVISIÓN</p>
               <p className="text-sm leading-relaxed text-chrome-2">
                 Documento en revisión. La versión definitiva se publicará antes de la puesta en
                 marcha del sitio.

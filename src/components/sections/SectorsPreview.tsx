@@ -37,7 +37,7 @@ export function SectorsPreview() {
                 index === sectors.length - 1 && 'md:col-span-2 lg:col-span-2'
               )}
             >
-              <SectorCard sector={sector} index={index} compact />
+              <SectorCard sector={sector} compact />
             </ScrollReveal>
           ))}
         </div>
