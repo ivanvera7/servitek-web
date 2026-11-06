@@ -26,7 +26,6 @@ export function BusinessUnits() {
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <ScrollReveal>
             <SectionHeading
-              eyebrow="Áreas de servicio"
               title="Cinco unidades de negocio"
               description="Del diagnóstico y el montaje al mantenimiento y la provisión de materiales certificados."
             />

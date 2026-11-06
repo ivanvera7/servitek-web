@@ -29,7 +29,7 @@ export default function NosotrosPage() {
         <div className="container-site grid gap-8 sm:grid-cols-2">
           {aboutContent.stats.map((stat, index) => (
             <ScrollReveal key={stat.label} delay={index * 90}>
-              <StatCard index={index} value={stat.value} label={stat.label} />
+              <StatCard value={stat.value} label={stat.label} />
             </ScrollReveal>
           ))}
         </div>

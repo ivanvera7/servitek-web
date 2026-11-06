@@ -26,12 +26,11 @@ export function Hero() {
             className="inline-flex animate-rise items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-chrome-muted"
             style={{ animationDelay: STEP.status }}
           >
-            <span className="status-dot" aria-hidden="true" />
             <span translate="no">{company.legalName}</span> · {company.contact.address}
           </p>
 
           <h1
-            className="mt-8 animate-rise text-[clamp(2.125rem,0.9rem+4.6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.025em] [font-stretch:115%]"
+            className="mt-8 animate-rise text-[clamp(2.125rem,1rem+3.4vw,4.25rem)] font-semibold leading-[0.95] tracking-[-0.025em] [font-stretch:115%]"
             style={{ animationDelay: STEP.headline }}
           >
             <span className="text-metal">Electromecánica industrial</span>{' '}
@@ -73,8 +72,8 @@ export function Hero() {
           className="grid animate-rise grid-cols-1 gap-8 sm:grid-cols-2"
           style={{ animationDelay: STEP.stats }}
         >
-          {aboutContent.stats.map((stat, index) => (
-            <StatCard key={stat.label} index={index} value={stat.value} label={stat.label} />
+          {aboutContent.stats.map((stat) => (
+            <StatCard key={stat.label} value={stat.value} label={stat.label} />
           ))}
         </div>
       </div>

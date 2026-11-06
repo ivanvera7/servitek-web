@@ -118,6 +118,8 @@ const config: Config = {
         blink: 'blink 2.4s ease-in-out infinite',
         'pulse-ring': 'pulseRing 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite',
         progress: 'progress 1.3s cubic-bezier(0.65, 0, 0.35, 1) infinite',
+        // Mensaje de error de un campo: aparece en su sitio, sin saltar.
+        'error-in': 'errorIn 200ms cubic-bezier(0.16, 1, 0.3, 1) both',
       },
       keyframes: {
         rise: {
@@ -146,6 +148,10 @@ const config: Config = {
         pulseRing: {
           from: { transform: 'scale(1)', opacity: '0.55' },
           to: { transform: 'scale(1.7)', opacity: '0' },
+        },
+        errorIn: {
+          from: { opacity: '0', transform: 'translate3d(0, -4px, 0)' },
+          to: { opacity: '1', transform: 'none' },
         },
         progress: {
           from: { transform: 'translateX(-110%)' },

@@ -1,8 +1,11 @@
 import { cn } from '@/lib/utils';
 
 interface SectionHeadingProps {
-  /** Rótulo monoespaciado superior (SECTORES, PROCESO, ...). */
-  eyebrow: string;
+  /**
+   * Rótulo monoespaciado superior. Opcional y escaso: como mucho uno de cada
+   * tres encabezados de una misma página, o deja de distinguir nada.
+   */
+  eyebrow?: string;
   title: string;
   description?: string;
   className?: string;
@@ -24,8 +27,11 @@ export function SectionHeading({
   const center = align === 'center';
   return (
     <div className={cn(center ? 'mx-auto max-w-4xl text-center' : 'max-w-3xl', className)}>
-      <span className={cn('eyebrow', center && 'eyebrow-center')}>{eyebrow}</span>
-      <h2 id={id} className={cn('mt-6 font-semibold', center ? 'text-display' : 'text-h2')}>
+      {eyebrow && <span className={cn('eyebrow', center && 'eyebrow-center')}>{eyebrow}</span>}
+      <h2
+        id={id}
+        className={cn(eyebrow && 'mt-6', 'font-semibold', center ? 'text-display' : 'text-h2')}
+      >
         {center ? <span className="text-metal">{title}</span> : title}
       </h2>
       {description && (

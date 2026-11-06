@@ -28,12 +28,11 @@ export function Footer() {
       <div className="container-site relative pb-28 pt-20 md:pb-12 md:pt-24">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Link href="/" aria-label="SERVITEK — Inicio" className="inline-block">
+            <Link href="/" aria-label="SERVITEK, ir al inicio" className="inline-block">
               <Logo className="h-12" />
             </Link>
             <p className="mt-7 max-w-sm leading-relaxed text-chrome-muted">{company.description}</p>
             <p className="mt-8 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.14em] text-chrome-muted">
-              <span className="status-dot" aria-hidden="true" />
               {businessHours.weekdays.label} {businessHours.weekdays.value}
             </p>
           </div>

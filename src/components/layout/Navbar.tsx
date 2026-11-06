@@ -97,7 +97,7 @@ export function Navbar() {
         )}
       >
         <div className="container-site flex h-16 items-center justify-between gap-6 md:h-header">
-          <Link href="/" className="relative z-10 shrink-0" aria-label="SERVITEK — Inicio">
+          <Link href="/" className="relative z-10 shrink-0" aria-label="SERVITEK, ir al inicio">
             <Logo
               priority
               className="h-9 transition-[filter] duration-base hover:brightness-110 md:h-11"

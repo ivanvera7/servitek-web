@@ -32,8 +32,7 @@ export function CTASection() {
             </div>
 
             <div className="relative max-w-2xl">
-              <span className="eyebrow">Contacto</span>
-              <h2 className="mt-7 text-display font-semibold">
+              <h2 className="text-display font-semibold">
                 <span className="text-metal">¿Necesita una solución técnica?</span>
               </h2>
               <p className="mt-7 max-w-xl text-lead text-chrome-2">

@@ -14,7 +14,6 @@ export function OfficialDistributor() {
       <div className="container-site">
         <ScrollReveal>
           <SectionHeading
-            eyebrow="Distribuidor oficial"
             title="Respaldados por fabricantes líderes del sector"
             description="Somos distribuidores oficiales de marcas reconocidas en iluminación industrial, lo que garantiza productos certificados y soporte técnico directo del fabricante."
           />

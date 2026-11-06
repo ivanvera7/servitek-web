@@ -3,7 +3,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { whyServitek } from '@/data/company-content';
 
 /** Cinco pilares como ficha técnica: número grande, nombre y descripción. */
-export function WhyServitek({ eyebrow = '¿Por qué SERVITEK?' }: { eyebrow?: string }) {
+export function WhyServitek({ eyebrow }: { eyebrow?: string }) {
   return (
     <section className="section overflow-hidden border-y border-line bg-ink-2/60">
       <div className="grid-lines" aria-hidden="true" />

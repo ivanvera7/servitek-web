@@ -77,7 +77,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'SERVITEK E.A.S. — Electromecánica industrial en Paraguay',
+        alt: 'SERVITEK E.A.S., electromecánica industrial en Paraguay',
       },
     ],
   },

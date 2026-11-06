@@ -23,7 +23,6 @@ export function Clients({ className }: { className?: string }) {
           <SectionHeading
             align="center"
             id="clientes-titulo"
-            eyebrow="Clientes"
             title="Empresas que confían en SERVITEK"
             description="Industrias y empresas líderes del Paraguay que mantienen su operación en marcha con nuestro equipo técnico."
           />

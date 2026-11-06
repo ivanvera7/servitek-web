@@ -45,7 +45,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
       <PageHero
         eyebrow="Proyecto"
         title={project.title}
-        subtitle={`${project.sector} — ${project.location}`}
+        subtitle={`${project.sector}, ${project.location}`}
         breadcrumbs={[
           { label: 'Proyectos', href: '/proyectos' },
           { label: project.title, href: `/proyectos/${project.id}` },

@@ -38,7 +38,7 @@ type ContactFormData = z.infer<typeof contactFormSchema>;
 const inputBase = 'field';
 
 /** Rojo accesible sobre los fondos oscuros del sitio (6,1:1 sobre #0b253f). */
-const errorText = 'mt-1.5 flex items-start gap-1.5 text-sm text-danger';
+const errorText = 'mt-1.5 flex animate-error-in items-start gap-1.5 text-sm text-danger';
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
