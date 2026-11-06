@@ -42,7 +42,8 @@ export function Clients({ className }: { className?: string }) {
                         width={client.logoWidth}
                         height={client.logoHeight}
                         className={cn(
-                          'w-auto max-w-full object-contain opacity-70 brightness-0 invert transition-opacity duration-base ease-out-expo group-hover:opacity-100',
+                          'w-auto max-w-full object-contain transition-opacity duration-base ease-out-expo group-hover:opacity-100',
+                          client.logoTone === 'color' ? 'opacity-90' : 'opacity-70 brightness-0 invert',
                           client.logoClass
                         )}
                       />

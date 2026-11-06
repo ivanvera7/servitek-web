@@ -8,7 +8,7 @@ Primera versión estable del sitio.
 
 ### Añadido
 - Sección **Clientes** en la portada y en Nosotros: Farmacias Catedral S.A.,
-  Cervepar S.A., Biox S.A., Copavic Ltda., Piroy S.A. y Elevare EAS. Logotipos
+  Cervepar S.A., Biox S.A., Copavic Ltda., Piro'y S.A. y Elevare EAS. Logotipos
   en cromo monocromo que se encienden al pasar el cursor; los clientes sin
   logotipo disponible se muestran como marca tipográfica.
 - Datos de clientes en `src/data/clients.ts` y pruebas que verifican que cada

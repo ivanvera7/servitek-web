@@ -6,4 +6,9 @@ export interface Client {
   logoHeight?: number;
   /** Clase de altura para equilibrar ópticamente logos de proporción distinta. */
   logoClass?: string;
+  /**
+   * `mono` (por defecto): silueta blanca. `color`: colores originales, para
+   * logos cuyas piezas se fundirían en una silueta única.
+   */
+  logoTone?: 'mono' | 'color';
 }

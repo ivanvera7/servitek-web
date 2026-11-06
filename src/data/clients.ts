@@ -3,8 +3,8 @@ import { Client } from '@/types/client';
 /**
  * Empresas que confían en SERVITEK (lista facilitada por la empresa).
  *
- * Los logotipos se tomaron de las webs públicas de cada cliente. Copavic,
- * Piroy y Elevare no publican un logotipo descargable: se muestran como marca
+ * Los logotipos se tomaron de las webs públicas de cada cliente (Biox: bioxsa.com). Copavic,
+ * Piro'y y Elevare no publican un logotipo descargable: se muestran como marca
  * tipográfica hasta que la empresa facilite el archivo oficial. Para añadirlo,
  * copiarlo en public/images/clients/ y completar `logo`, `logoWidth` y
  * `logoHeight`.
@@ -29,12 +29,13 @@ export const clients: Client[] = [
   },
   {
     name: 'Biox S.A.',
-    logo: '/images/clients/biox.svg',
-    logoWidth: 126,
-    logoHeight: 42,
-    logoClass: 'h-10 md:h-11',
+    logo: '/images/clients/biox.webp',
+    logoWidth: 480,
+    logoHeight: 332,
+    logoClass: 'h-16 md:h-[4.5rem]',
+    logoTone: 'color',
   },
   { name: 'Copavic Ltda.' },
-  { name: 'Piroy S.A.' },
+  { name: "Piro'y S.A." },
   { name: 'Elevare EAS' },
 ];

@@ -474,7 +474,7 @@ grep -rn "PENDIENTE (empresa)" src/
 | Email corporativo propio (hoy hay un Gmail) | `src/data/company.ts` | Sí |
 | Foto y biografía del fundador | `company-content.ts` | No |
 | Proyectos reales con autorización del cliente | `src/data/projects.ts` | No |
-| Logotipos oficiales de Copavic, Piroy y Elevare, y permiso de cada cliente para mostrar su marca | `src/data/clients.ts` | No |
+| Logotipos oficiales de Copavic, Piro'y y Elevare, y permiso de cada cliente para mostrar su marca | `src/data/clients.ts` | No |
 | Cifras verificables (años, proyectos, equipo) | `company-content.ts` | No |
 | Sector cárnicas: el texto original llegó cortado | `src/data/sectors.ts` | No |
 | Confirmar si el sector *Alcoholeras* se mantiene | `src/data/sectors.ts` | No |
