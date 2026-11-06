@@ -33,8 +33,8 @@ export function Hero() {
             className="mt-8 animate-rise text-[clamp(2.125rem,1rem+3.4vw,4.25rem)] font-semibold leading-[0.95] tracking-[-0.025em] [font-stretch:115%]"
             style={{ animationDelay: STEP.headline }}
           >
-            <span className="text-metal">Electromecánica industrial</span>{' '}
-            <span className="text-chrome-2">para plantas que no pueden parar.</span>
+            <span className="text-metal">Electromecánica</span>{' '}
+            <span className="text-chrome-2">para plantas que no paran.</span>
           </h1>
 
           <p

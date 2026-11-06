@@ -14,7 +14,8 @@ Todos los cambios relevantes del sitio web de SERVITEK.
 ### Cambiado
 - Pulido de acabado premium: en la portada solo tres secciones conservan el
   rótulo superior (antes ocho), se quitan los puntos de estado decorativos y
-  los índices 01/02 de las cifras, el titular del hero es más contenido y los
+  los índices 01/02 de las cifras, el titular del hero se acorta a
+  «Electromecánica para plantas que no paran.» (3 líneas en escritorio) y los
   mensajes de error del formulario aparecen con una transición breve.
 - Sin rayas largas en textos visibles ni en etiquetas accesibles.
 
